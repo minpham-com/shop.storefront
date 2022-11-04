@@ -79,20 +79,20 @@ const fetchFeaturedProducts = async (
         price: cheapestVariant
           ? {
               calculated_price: formatAmount({
-                amount: cheapestVariant.calculated_price,
+                amount: cheapestVariant.calculated_price || 0,
                 region: region,
                 includeTaxes: false,
               }),
               original_price: formatAmount({
-                amount: cheapestVariant.original_price,
+                amount: cheapestVariant.original_price || 0,
                 region: region,
                 includeTaxes: false,
               }),
               difference: getPercentageDiff(
-                cheapestVariant.original_price,
-                cheapestVariant.calculated_price
+                cheapestVariant.original_price || 0,
+                cheapestVariant.calculated_price || 0
               ),
-              price_type: cheapestVariant.calculated_price_type,
+              price_type: cheapestVariant.calculated_price_type || 'default',
             }
           : {
               calculated_price: "N/A",

@@ -7,14 +7,15 @@ import React, { Fragment } from "react"
 type ModalProps = {
   isOpen: boolean
   close: () => void
-  size?: "small" | "medium" | "large"
+  size?: "small" | "medium" | "large",
+  children?: any
 }
 
 const Modal: React.FC<ModalProps> & {
-  Title: React.FC
-  Description: React.FC
-  Body: React.FC
-  Footer: React.FC
+  Title: any
+  Description: any
+  Body: any
+  Footer: any
 } = ({ isOpen, close, size = "medium", children }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -62,7 +63,7 @@ const Modal: React.FC<ModalProps> & {
   )
 }
 
-const Title: React.FC = ({ children }) => {
+const Title: React.FC = ({ children } :any) => {
   const { close } = useModal()
 
   return (
@@ -77,7 +78,7 @@ const Title: React.FC = ({ children }) => {
   )
 }
 
-const Description: React.FC = ({ children }) => {
+const Description: React.FC = ({ children } :any) => {
   return (
     <Dialog.Description className="flex text-small-regular text-gray-700 items-center justify-center pt-2 pb-4 h-full">
       {children}
@@ -85,11 +86,11 @@ const Description: React.FC = ({ children }) => {
   )
 }
 
-const Body: React.FC = ({ children }) => {
+const Body: React.FC = ({ children } :any) => {
   return <div className="flex-1">{children}</div>
 }
 
-const Footer: React.FC = ({ children }) => {
+const Footer: React.FC = ({ children } : any) => {
   return <div className="flex items-center justify-end gap-x-4">{children}</div>
 }
 

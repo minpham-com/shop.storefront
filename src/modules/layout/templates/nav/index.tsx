@@ -71,16 +71,16 @@ const Nav = () => {
           </div>
 
           <div className="flex items-center h-full">
-            <Link href="/">
-              <a className="text-xl-semi uppercase">Acme</a>
+            <Link href="/" className="text-xl-semi uppercase" legacyBehavior>
+              Acme
             </Link>
           </div>
 
           <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
             <div className="hidden small:flex items-center gap-x-6 h-full">
               {process.env.FEATURE_SEARCH_ENABLED && <DesktopSearchModal />}
-              <Link href="/account">
-                <a>Account</a>
+              <Link href="/account" legacyBehavior>
+                Account
               </Link>
             </div>
             <CartDropdown />

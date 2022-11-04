@@ -26,10 +26,8 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
   return (
     <div className="flex flex-col gap-y-2">
       {product.collection && (
-        <Link href={`/collections/${product.collection.id}`}>
-          <a className="text-small-regular text-gray-700">
-            {product.collection.title}
-          </a>
+        <Link href={`/collections/${product.collection.id}`} className="text-small-regular text-gray-700" legacyBehavior>
+          {product.collection.title}
         </Link>
       )}
       <h3 className="text-xl-regular">{product.title}</h3>
@@ -61,18 +59,18 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
                 "text-rose-600": selectedPrice.price_type === "sale",
               })}
             >
-              {selectedPrice.calculated_price}
+              {selectedPrice.calculated_price || 0 }
             </span>
             {selectedPrice.price_type === "sale" && (
               <>
                 <p>
                   <span className="text-gray-500">Original: </span>
                   <span className="line-through">
-                    {selectedPrice.original_price}
+                    {selectedPrice.original_price || 0 }
                   </span>
                 </p>
                 <span className="text-rose-600">
-                  -{selectedPrice.percentage_diff}%
+                  -{selectedPrice.percentage_diff || 0}%
                 </span>
               </>
             )}
