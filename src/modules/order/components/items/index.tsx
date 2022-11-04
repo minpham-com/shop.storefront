@@ -31,6 +31,7 @@ const Items = ({ items, region, cartId }: ItemsProps) => {
                         <h3 className="text-base-regular overflow-ellipsis overflow-hidden whitespace-nowrap mr-4">
                           <Link
                             href={`/products/${item.variant.product.handle}`}
+                            legacyBehavior
                           >
                             {item.title}
                           </Link>

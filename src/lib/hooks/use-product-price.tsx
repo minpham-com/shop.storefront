@@ -44,21 +44,25 @@ const useProductPrice = ({ id, variantId }: useProductPriceProps) => {
       return prev.calculated_price < curr.calculated_price ? prev : curr
     })
 
+    if (!cheapestVariant) {
+      return null
+    }
+
     return {
       calculated_price: formatAmount({
-        amount: cheapestVariant.calculated_price,
+        amount: cheapestVariant.calculated_price || 0,
         region: cart.region,
         includeTaxes: false,
       }),
       original_price: formatAmount({
-        amount: cheapestVariant.original_price,
+        amount: cheapestVariant.original_price || 0,
         region: cart.region,
         includeTaxes: false,
       }),
-      price_type: cheapestVariant.calculated_price_type,
+      price_type: cheapestVariant.calculated_price_type || 'default',
       percentage_diff: getPercentageDiff(
-        cheapestVariant.original_price,
-        cheapestVariant.calculated_price
+        cheapestVariant.original_price || 0,
+        cheapestVariant.calculated_price || 0
       ),
     }
   }, [product, cart?.region])
@@ -78,19 +82,19 @@ const useProductPrice = ({ id, variantId }: useProductPriceProps) => {
 
     return {
       calculated_price: formatAmount({
-        amount: variant.calculated_price,
+        amount: variant.calculated_price || 0 ,
         region: cart.region,
         includeTaxes: false,
       }),
       original_price: formatAmount({
-        amount: variant.original_price,
+        amount: variant.original_price || 0,
         region: cart.region,
         includeTaxes: false,
       }),
-      price_type: variant.calculated_price_type,
+      price_type: variant.calculated_price_type || 'default',
       percentage_diff: getPercentageDiff(
-        variant.original_price,
-        variant.calculated_price
+        variant.original_price || 0,
+        variant.calculated_price || 0
       ),
     }
   }, [product, variantId, cart?.region])

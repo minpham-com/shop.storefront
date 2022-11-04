@@ -12,7 +12,7 @@ const Hero = () => {
           This year, our new summer collection will shelter you from the harsh
           elements of a world that doesn&apos;t care if you live or die.
         </p>
-        <UnderlineLink href="/store">Explore products</UnderlineLink>
+        <UnderlineLink href="/store"><>Explore products</></UnderlineLink>
       </div>
       <Image
         src="/hero.jpg"

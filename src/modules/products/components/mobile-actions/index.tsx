@@ -54,7 +54,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
                   {selectedPrice.price_type === "sale" && (
                     <p>
                       <span className="line-through text-small-regular">
-                        {selectedPrice.original_price}
+                        {selectedPrice.original_price || 0}
                       </span>
                     </p>
                   )}
@@ -63,7 +63,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
                       "text-rose-600": selectedPrice.price_type === "sale",
                     })}
                   >
-                    {selectedPrice.calculated_price}
+                    {selectedPrice.calculated_price || 0}
                   </span>
                 </div>
               ) : (
@@ -75,7 +75,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
                 <div className="flex items-center justify-between w-full">
                   <span>
                     {variant
-                      ? Object.values(options).join(" / ")
+                      ? Object.values(options).join(" / ")
                       : "Select Options"}
                   </span>
                   <ChevronDown />
