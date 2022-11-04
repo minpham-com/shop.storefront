@@ -177,6 +177,15 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                                 <ChevronDown className="-rotate-90" />
                               </button>
                             </div>
+                            <button
+                              className="flex items-center justify-between"
+                              onClick={close}
+                            >
+                              <span className="sr-only">
+                                Go to order #{order.display_id}
+                              </span>
+                              <ChevronDown className="-rotate-90" />
+                            </button>
                           </a>
                         </Link>
                       </li>
