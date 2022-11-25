@@ -1,6 +1,7 @@
 import { Listbox, Transition } from "@headlessui/react"
 import { useStore } from "@lib/context/store-context"
 import useToggleState from "@lib/hooks/use-toggle-state"
+import useTranslation from "@lib/hooks/use-translation"
 import { useRegions } from "medusa-react"
 import { Fragment, useEffect, useMemo, useState } from "react"
 import ReactCountryFlag from "react-country-flag"
@@ -16,7 +17,7 @@ const CountrySelect = () => {
   const { regions } = useRegions()
   const [current, setCurrent] = useState<CountryOption | undefined>(undefined)
   const { state, open, close } = useToggleState()
-
+  const { t } = useTranslation()
   const options: CountryOption[] | undefined = useMemo(() => {
     return regions
       ?.map((r) => {
@@ -53,7 +54,7 @@ const CountrySelect = () => {
       >
         <Listbox.Button className="py-1 w-full">
           <div className="text-small-regular flex items-center gap-x-2 xsmall:justify-end">
-            <span>Shipping to:</span>
+            <span>{ t('ShippingTo') }:</span>
             {current && (
               <span className="text-small-semi flex items-center gap-x-2">
                 <ReactCountryFlag

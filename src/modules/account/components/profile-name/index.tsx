@@ -1,4 +1,5 @@
 import { useAccount } from "@lib/context/account-context"
+import useTranslation from "@lib/hooks/use-translation"
 import { Customer } from "@medusajs/medusa"
 import Input from "@modules/common/components/input"
 import { useUpdateMe } from "medusa-react"
@@ -30,7 +31,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
   })
 
   const { refetchCustomer } = useAccount()
-
+  const { t } = useTranslation()
   const {
     mutate: update,
     isLoading,
@@ -72,7 +73,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
   return (
     <form onSubmit={handleSubmit(updateName)} className="w-full">
       <AccountInfo
-        label="Name"
+        label={ t("Name") }
         currentInfo={`${customer.first_name} ${customer.last_name}`}
         isLoading={isLoading}
         isSuccess={isSuccess}
@@ -81,7 +82,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
       >
         <div className="grid grid-cols-2 gap-x-4">
           <Input
-            label="First name"
+            label={ t("FirstName") }
             {...register("first_name", {
               required: true,
             })}
@@ -89,7 +90,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
             errors={errors}
           />
           <Input
-            label="Last name"
+            label={ t("LastName") }
             {...register("last_name", { required: true })}
             defaultValue={lastName}
             errors={errors}

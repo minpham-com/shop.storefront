@@ -1,12 +1,14 @@
+import useTranslation from "@lib/hooks/use-translation"
 import LoginTemplate from "@modules/account/templates/login-template"
 import Head from "@modules/common/components/head"
 import Layout from "@modules/layout/templates"
 import { NextPageWithLayout } from "types/global"
 
 const Login: NextPageWithLayout = () => {
+  const { t } = useTranslation()
   return (
     <>
-      <Head title="Sign in" description="Sign in to your ACME account." />
+      <Head title={ t("SignIn") } description={ t("SignInToYourAccount") } />
       <LoginTemplate />
     </>
   )

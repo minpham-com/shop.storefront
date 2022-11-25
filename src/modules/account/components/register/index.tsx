@@ -1,5 +1,6 @@
 import { medusaClient } from "@lib/config"
 import { LOGIN_VIEW, useAccount } from "@lib/context/account-context"
+import useTranslation from "@lib/hooks/use-translation"
 import Button from "@modules/common/components/button"
 import Input from "@modules/common/components/input"
 import Link from "next/link"
@@ -20,9 +21,9 @@ const Register = () => {
   const [_, setCurrentView] = loginView
   const [authError, setAuthError] = useState<string | undefined>(undefined)
   const router = useRouter()
-
+  const { t } = useTranslation()
   const handleError = (e: Error) => {
-    setAuthError("An error occured. Please try again.")
+    setAuthError(t("AnErrorOccuredPleaseTryAgain"))
   }
 
   const {
@@ -43,41 +44,40 @@ const Register = () => {
 
   return (
     <div className="max-w-sm flex flex-col items-center mt-12">
-      <h1 className="text-large-semi uppercase mb-6">Become a Acme Member</h1>
+      <h1 className="text-large-semi uppercase mb-6">{ t('BecomeAMember') }</h1>
       <p className="text-center text-base-regular text-gray-700 mb-4">
-        Create your Acme Member profile, and get access to an enhanced shopping
-        experience.
+        { t('CreateYourMemberProfileAndGetAccessToAnEnhancedShoppingExperience') }
       </p>
       <form className="w-full flex flex-col" onSubmit={onSubmit}>
         <div className="flex flex-col w-full gap-y-2">
           <Input
-            label="First name"
-            {...register("first_name", { required: "First name is required" })}
+            label={ t("FirstName") }
+            {...register("first_name", { required: t('ValidateIsRequired', { attribute: t('FistName') } ) })}
             autoComplete="given-name"
             errors={errors}
           />
           <Input
-            label="Last name"
-            {...register("last_name", { required: "Last name is required" })}
+            label={ t("LastName") }
+            {...register("last_name", { required: t('ValidateIsRequired', { attribute: t('LastName') } ) })}
             autoComplete="family-name"
             errors={errors}
           />
           <Input
-            label="Email"
-            {...register("email", { required: "Email is required" })}
+            label={ t("Email") }
+            {...register("email", { required: t('ValidateIsRequired', { attribute: t('Email') } ) })}
             autoComplete="email"
             errors={errors}
           />
           <Input
-            label="Phone"
+            label={ t("Phone") }
             {...register("phone")}
             autoComplete="tel"
             errors={errors}
           />
           <Input
-            label="Password"
+            label={ t("Password") }
             {...register("password", {
-              required: "Password is required",
+              required: t('ValidateIsRequired', { attribute: t('Password') } ),
             })}
             type="password"
             autoComplete="new-password"
@@ -87,30 +87,30 @@ const Register = () => {
         {authError && (
           <div>
             <span className="text-rose-500 w-full text-small-regular">
-              These credentials do not match our records
+              { t('TheseCredentialsDoNotMatchOurRecords') }
             </span>
           </div>
         )}
         <span className="text-center text-gray-700 text-small-regular mt-6">
-          By creating an account, you agree to Acme&apos;s{" "}
+          { t('ByCreatingAnAccountYouAgreeTo') }
           <Link href="/content/privacy-policy" className="underline" legacyBehavior>
-            Privacy Policy
+            { t('PrivacyPolicy') }
           </Link>{" "}
-          and{" "}
+          { t('and') }{" "}
           <Link href="/content/terms-of-use" className="underline" legacyBehavior>
-            Terms of Use
+            { t('TermsOfUse') }
           </Link>
           .
         </span>
-        <Button className="mt-6">Join</Button>
+        <Button className="mt-6">{ t('Join') }</Button>
       </form>
       <span className="text-center text-gray-700 text-small-regular mt-6">
-        Already a member?{" "}
+        { t('AlreadyAMember') }{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}
           className="underline"
         >
-          Sign in
+          { t('SignIn') }
         </button>
         .
       </span>

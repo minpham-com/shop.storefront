@@ -1,6 +1,7 @@
 import { medusaClient } from "@lib/config"
 import { useAccount } from "@lib/context/account-context"
 import useToggleState from "@lib/hooks/use-toggle-state"
+import useTranslation from "@lib/hooks/use-translation"
 import { Address } from "@medusajs/medusa"
 import CountrySelect from "@modules/checkout/components/country-select"
 import Button from "@modules/common/components/button"
@@ -38,7 +39,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
   const { state, open, close } = useToggleState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | undefined>(undefined)
-
+  const { t } = useTranslation()
   const { refetchCustomer } = useAccount()
   const {
     register,
@@ -86,7 +87,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
       })
       .catch(() => {
         setSubmitting(false)
-        setError("Failed to update address, please try again.")
+        setError(t("FailedToUpdateAddressPleaseTryAgain"))
       })
   })
 
@@ -135,72 +136,72 @@ const EditAddress: React.FC<EditAddressProps> = ({
             onClick={open}
           >
             <Edit size={16} />
-            Edit
+            { t('Edit') }
           </button>
           <button
             className="text-small-regular text-gray-700 flex items-center gap-x-2"
             onClick={removeAddress}
           >
             <Trash />
-            Remove
+            { t('Remove') }
           </button>
         </div>
       </div>
 
       <Modal isOpen={state} close={close}>
-        <Modal.Title>Edit address</Modal.Title>
+        <Modal.Title>{ t('EditAddress') }</Modal.Title>
         <Modal.Body>
           <div className="grid grid-cols-1 gap-y-2">
             <div className="grid grid-cols-2 gap-x-2">
               <Input
-                label="First name"
+                label={ t("FirstName") }
                 {...register("first_name", {
-                  required: "First name is required",
+                  required: t("ValidateIsRequired", {"attribute": t("FirstName")}),
                 })}
                 required
                 errors={errors}
                 autoComplete="given-name"
               />
               <Input
-                label="Last name"
+                label={ t("LastName") }
                 {...register("last_name", {
-                  required: "Last name is required",
+                  required: t("ValidateIsRequired", {"attribute": t("LastName")}),
                 })}
                 required
                 errors={errors}
                 autoComplete="family-name"
               />
             </div>
-            <Input label="Company" {...register("company")} errors={errors} />
+            <Input label={ t("Company") } {...register("company")} errors={errors} />
             <Input
-              label="Address"
+              label={ t("Address") }
               {...register("address_1", {
-                required: "Address is required",
+                required: t("ValidateIsRequired", {"attribute": t("Address")}),
               })}
               required
               errors={errors}
               autoComplete="address-line1"
             />
             <Input
-              label="Apartment, suite, etc."
+              label={ t("ApartmentSuiteEtc") }
               {...register("address_2")}
               errors={errors}
               autoComplete="address-line2"
             />
             <div className="grid grid-cols-[144px_1fr] gap-x-2">
               <Input
-                label="Postal code"
+                label={ t("PostalCode") }
                 {...register("postal_code", {
-                  required: "Postal code is required",
+                  required: t("ValidateIsRequired", {"attribute": t("PostalCode")}),
                 })}
                 required
                 errors={errors}
                 autoComplete="postal-code"
               />
               <Input
-                label="City"
+                label={ t("City") }
                 {...register("city", {
-                  required: "City is required",
+                  required: t("ValidateIsRequired", {"attribute": t("City")}),
                 })}
                 errors={errors}
                 required
@@ -208,7 +209,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
               />
             </div>
             <Input
-              label="Province / State"
+              label={ t("ProvinceState") }
               {...register("province")}
               errors={errors}
               autoComplete="address-level1"
@@ -218,7 +219,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
               autoComplete="country"
             />
             <Input
-              label="Phone"
+              label={ t("Phone") }
               {...register("phone")}
               errors={errors}
               autoComplete="phone"
@@ -230,10 +231,10 @@ const EditAddress: React.FC<EditAddressProps> = ({
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={close}>
-            Cancel
+            { t('Cancel') }
           </Button>
           <Button onClick={submit} disabled={submitting}>
-            Save
+            { t('Save') }
             {submitting && <Spinner />}
           </Button>
         </Modal.Footer>

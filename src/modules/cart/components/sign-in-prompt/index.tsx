@@ -1,18 +1,20 @@
+import useTranslation from "@lib/hooks/use-translation"
 import Button from "@modules/common/components/button"
 import Link from "next/link"
 
 const SignInPrompt = () => {
+  const { t } = useTranslation()
   return (
     <div className="bg-white flex items-start justify-between">
       <div>
-        <h2 className="text-xl-semi">Already have an account?</h2>
+        <h2 className="text-xl-semi">{ t('AlreadyHaveAnAccount') }</h2>
         <p className="text-base-regular text-gray-700 mt-2">
-          Sign in for a better experience.
+          { t('SignInForABetterExperience') }
         </p>
       </div>
       <div>
         <Link href="/account/login" legacyBehavior>
-          <Button variant="secondary">Sign in</Button>
+          <Button variant="secondary">{ t('SignIn') }</Button>
         </Link>
       </div>
     </div>

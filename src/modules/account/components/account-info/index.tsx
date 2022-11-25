@@ -1,5 +1,6 @@
 import { Disclosure } from "@headlessui/react"
 import useToggleState from "@lib/hooks/use-toggle-state"
+import useTranslation from "@lib/hooks/use-translation"
 import Button from "@modules/common/components/button"
 import clsx from "clsx"
 import { useEffect } from "react"
@@ -26,7 +27,7 @@ const AccountInfo = ({
   children,
 }: AccountInfoProps) => {
   const { state, close, toggle } = useToggleState()
-
+  const { t } = useTranslation()
   const handleToggle = () => {
     clearState()
     setTimeout(() => toggle(), 100)
@@ -56,9 +57,9 @@ const AccountInfo = ({
             variant="secondary"
             className="w-[100px] min-h-[25px] py-1"
             onClick={handleToggle}
-            type={state ? "reset" : "button"}
+            type={state ? "reset": "button"}
           >
-            {state ? "Cancel" : "Edit"}
+            {state ? t("Cancel") : t("Edit")}
           </Button>
         </div>
       </div>
@@ -118,7 +119,7 @@ const AccountInfo = ({
                 className="w-full small:max-w-[140px]"
                 type="submit"
               >
-                Save changes
+                { t('SaveChanges') }
               </Button>
             </div>
           </div>

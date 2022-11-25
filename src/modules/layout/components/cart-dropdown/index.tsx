@@ -2,6 +2,7 @@ import { Popover, Transition } from "@headlessui/react"
 import { useCartDropdown } from "@lib/context/cart-dropdown-context"
 import { useStore } from "@lib/context/store-context"
 import useEnrichedLineItems from "@lib/hooks/use-enrich-line-items"
+import useTranslation from "@lib/hooks/use-translation"
 import Button from "@modules/common/components/button"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
@@ -16,12 +17,12 @@ const CartDropdown = () => {
   const items = useEnrichedLineItems()
   const { deleteItem } = useStore()
   const { state, open, close } = useCartDropdown()
-
+  const { t } = useTranslation()
   return (
     <div className="h-full z-50" onMouseEnter={open} onMouseLeave={close}>
       <Popover className="relative h-full">
         <Link href="/cart" passHref>
-          <Popover.Button className="h-full">{`My Bag (${totalItems})`}</Popover.Button>
+          <Popover.Button className="h-full">{ t('MyBag', { num: totalItems }) }</Popover.Button>
         </Link>
         <Transition
           show={state}
@@ -38,7 +39,7 @@ const CartDropdown = () => {
             className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[382px] text-gray-900"
           >
             <div className="p-4 flex items-center justify-center">
-              <h3 className="text-large-semi">Shopping Bag</h3>
+              <h3 className="text-large-semi">{ t('ShoppingBag') }</h3>
             </div>
             {cart && items?.length ? (
               <>
@@ -67,7 +68,7 @@ const CartDropdown = () => {
                                   </Link>
                                 </h3>
                                 <LineItemOptions variant={item.variant} />
-                                <span>Quantity: {item.quantity}</span>
+                                <span>{ t('Quantity') }: {item.quantity}</span>
                               </div>
                               <div className="flex justify-end">
                                 <LineItemPrice
@@ -85,7 +86,7 @@ const CartDropdown = () => {
                                 onClick={() => deleteItem(item.id)}
                               >
                                 <Trash size={14} />
-                                <span>Remove</span>
+                                <span>{ t('Remove') }</span>
                               </button>
                             </div>
                           </div>
@@ -96,8 +97,8 @@ const CartDropdown = () => {
                 <div className="p-4 flex flex-col gap-y-4 text-small-regular">
                   <div className="flex items-center justify-between">
                     <span className="text-gray-700 font-semibold">
-                      Subtotal{" "}
-                      <span className="font-normal">(incl. taxes)</span>
+                      { t('Subtotal') }{" "}
+                      <span className="font-normal">({ t('IncludeTaxes') })</span>
                     </span>
                     <span className="text-large-semi">
                       {formatAmount({
@@ -108,7 +109,7 @@ const CartDropdown = () => {
                     </span>
                   </div>
                   <Link href="/cart" passHref legacyBehavior>
-                    <Button>Go to bag</Button>
+                    <Button>{ t('GoToBag') }</Button>
                   </Link>
                 </div>
               </>
@@ -118,12 +119,12 @@ const CartDropdown = () => {
                   <div className="bg-gray-900 text-small-regular flex items-center justify-center w-6 h-6 rounded-full text-white">
                     <span>0</span>
                   </div>
-                  <span>Your shopping bag is empty.</span>
+                  <span>{ t('YourShoppingBagIsEmpty') }</span>
                   <div>
                     <Link href="/store" legacyBehavior>
                       <>
-                        <span className="sr-only">Go to all products page</span>
-                        <Button onClick={close}>Explore products</Button>
+                        <span className="sr-only">{ t('GoToAllProductsPage') }</span>
+                        <Button onClick={close}>{ t('ExploreProducts') }</Button>
                       </>
                     </Link>
                   </div>

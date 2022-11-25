@@ -1,4 +1,5 @@
 import { useAccount } from "@lib/context/account-context"
+import useTranslation from "@lib/hooks/use-translation"
 import { Customer } from "@medusajs/medusa"
 import Input from "@modules/common/components/input"
 import { useUpdateMe } from "medusa-react"
@@ -32,7 +33,7 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
   })
 
   const { refetchCustomer } = useAccount()
-
+  const { t } = useTranslation()
   const {
     mutate: update,
     isLoading,
@@ -63,7 +64,7 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
           refetchCustomer()
         },
         onError: () => {
-          setErrorMessage("Email already in use")
+          setErrorMessage("EmailAlreadyInUse")
         },
       }
     )
@@ -72,7 +73,7 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
   return (
     <form onSubmit={handleSubmit(updateEmail)} className="w-full">
       <AccountInfo
-        label="Email"
+        label={ t("Email") }
         currentInfo={`${customer.email}`}
         isLoading={isLoading}
         isSuccess={isSuccess}
@@ -82,7 +83,7 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
       >
         <div className="grid grid-cols-1 gap-y-2">
           <Input
-            label="Email"
+            label={ t("Email") }
             {...register("email", {
               required: true,
             })}

@@ -1,5 +1,6 @@
 import { medusaClient } from "@lib/config"
 import { IS_BROWSER } from "@lib/constants"
+import useTranslation from "@lib/hooks/use-translation"
 import Head from "@modules/common/components/head"
 import Layout from "@modules/layout/templates"
 import OrderCompletedTemplate from "@modules/order/templates/order-completed-template"
@@ -16,7 +17,7 @@ const fetchOrder = async (id: string) => {
 
 const Confirmed: NextPageWithLayout = () => {
   const router = useRouter()
-
+  const { t } = useTranslation()
   const id = typeof router.query?.id === "string" ? router.query.id : ""
 
   const { isSuccess, data, isLoading, isError } = useQuery(
@@ -44,8 +45,8 @@ const Confirmed: NextPageWithLayout = () => {
     return (
       <>
         <Head
-          title="Order Confirmed"
-          description="You purchase was successful"
+          title={ t("OrderConfirmed") }
+          description={ t("YouPurchaseWasSuccessful") }
         />
 
         <OrderCompletedTemplate order={data} />
