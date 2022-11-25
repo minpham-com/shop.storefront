@@ -1,5 +1,9 @@
 import useEnrichedLineItems from "@lib/hooks/use-enrich-line-items"
+<<<<<<< HEAD
 import { useTranslation } from "react-i18next"
+=======
+import useTranslation from "@lib/hooks/use-translation"
+>>>>>>> f87352a (try add local)
 import { LineItem, Region } from "@medusajs/medusa"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
@@ -39,9 +43,13 @@ const Items = ({ items, region, cartId }: ItemsProps) => {
                           </Link>
                         </h3>
                         <LineItemOptions variant={item.variant} />
+<<<<<<< HEAD
                         <span>
                           {t("Quantity")}: {item.quantity}
                         </span>
+=======
+                        <span>{ t('Quantity') }: {item.quantity}</span>
+>>>>>>> f87352a (try add local)
                       </div>
                       <div className="xsmall:flex xsmall:justify-end">
                         <LineItemPrice region={region} item={item} />

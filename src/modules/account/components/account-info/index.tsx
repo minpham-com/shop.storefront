@@ -57,7 +57,7 @@ const AccountInfo = ({
             variant="secondary"
             className="w-[100px] min-h-[25px] py-1"
             onClick={handleToggle}
-            type={state ? "reset" : "button"}
+            type={state ? "reset": "button"}
           >
             {state ? t("Cancel") : t("Edit")}
           </Button>
