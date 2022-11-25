@@ -1,7 +1,11 @@
+import { useTranslation } from "react-i18next"
 import UnderlineLink from "@modules/common/components/underline-link"
 import Image from "next/image"
+import useConfig from "@lib/hooks/use-config"
 
 const Hero = () => {
+  const { t } = useTranslation()
+  const { unsplashCollectionId } = useConfig()
   return (
     <div className="h-[90vh] w-full relative">
       <div className="text-white absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:text-left small:justify-end small:items-start small:p-32">
@@ -12,16 +16,18 @@ const Hero = () => {
           This year, our new summer collection will shelter you from the harsh
           elements of a world that doesn&apos;t care if you live or die.
         </p>
-        <UnderlineLink href="/store"><>Explore products</></UnderlineLink>
+        <UnderlineLink href="/store">
+          <>{t("ExploreProducts")}</>
+        </UnderlineLink>
       </div>
       <Image
-        src="/hero.jpg"
-        layout="fill"
+        src={ `https://source.unsplash.com/collection/${ unsplashCollectionId }/1200x600` }
+        fill
+        style={{ objectFit: "cover" }}
         loading="eager"
         priority={true}
         quality={90}
-        objectFit="cover"
-        alt="Photo by @thevoncomplex https://unsplash.com/@thevoncomplex"
+        alt="Photo by @unsplash"
         className="absolute inset-0"
         draggable="false"
       />

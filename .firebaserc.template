@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "project-id"
+  },
+  "targets": {
+    "project-id": {
+      "hosting": {
+        "project-id": [
+          "project-id"
+        ],
+        "project-id-dev": [
+          "project-id-dev"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

@@ -7,6 +7,7 @@ import clsx from "clsx"
 import { isEqual, omit } from "lodash"
 import { Fragment, useMemo, useState } from "react"
 import { useWatch } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 
 type AddressSelectProps = {
   addresses: Address[]
@@ -16,7 +17,7 @@ const AddressSelect = ({ addresses }: AddressSelectProps) => {
   const [selected, setSelected] = useState<string | undefined>(undefined)
 
   const { control, setSavedAddress } = useCheckout()
-
+  const { t } = useTranslation()
   const handleSelect = (id: string) => {
     const savedAddress = addresses.find((a) => a.id === id)
 
@@ -62,7 +63,7 @@ const AddressSelect = ({ addresses }: AddressSelectProps) => {
               <span className="block truncate">
                 {selectedAddress
                   ? selectedAddress.address_1
-                  : "Choose an address"}
+                  : t("ChooseAnAddress")}
               </span>
               <ChevronDown
                 size={16}

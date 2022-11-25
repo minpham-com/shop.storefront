@@ -1,20 +1,12 @@
 import { medusaClient } from "@lib/config"
-import { IS_BROWSER } from "@lib/constants"
-import { getCollectionIds } from "@lib/util/get-collection-ids"
 import CollectionTemplate from "@modules/collections/templates"
 import Head from "@modules/common/components/head"
 import Layout from "@modules/layout/templates"
 import SkeletonCollectionPage from "@modules/skeletons/templates/skeleton-collection-page"
-import { GetStaticPaths, GetStaticProps } from "next"
 import { useRouter } from "next/router"
-import { ParsedUrlQuery } from "querystring"
 import { ReactElement } from "react"
-import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query"
-import { NextPageWithLayout, PrefetchedPageProps } from "../../types/global"
-
-interface Params extends ParsedUrlQuery {
-  id: string
-}
+import { useQuery } from "@tanstack/react-query"
+import { NextPageWithLayout, PrefetchedPageProps } from "@type/global"
 
 const fetchCollection = async (id: string) => {
   return await medusaClient.collections.retrieve(id).then(({ collection }) => ({
@@ -48,46 +40,34 @@ export const fetchCollectionProducts = async ({
 const CollectionPage: NextPageWithLayout<PrefetchedPageProps> = ({
   notFound,
 }) => {
-  const { query, isFallback, replace } = useRouter()
+  const { query } = useRouter()
   const id = typeof query.id === "string" ? query.id : ""
 
-  const { data, isError, isSuccess, isLoading } = useQuery(
+  const { data, isError, isLoading } = useQuery(
     ["get_collection", id],
     () => fetchCollection(id)
   )
 
-  if (notFound) {
-    if (IS_BROWSER) {
-      replace("/404")
-    }
-
-    return <SkeletonCollectionPage />
-  }
-
-  if (isError) {
-    replace("/404")
-  }
-
-  if (isFallback || isLoading || !data) {
-    return <SkeletonCollectionPage />
-  }
-
-  if (isSuccess) {
-    return (
-      <>
-        <Head title={data.title} description={`${data.title} collection`} />
+  return (
+    <>
+      <Head
+        title={data?.title || ""}
+        description={`${data?.title} collection`}
+      />
+      {isError || isLoading || !data ? (
+        <SkeletonCollectionPage />
+      ) : (
         <CollectionTemplate collection={data} />
-      </>
-    )
-  }
-
-  return <></>
+      )}
+    </>
+  )
 }
 
 CollectionPage.getLayout = (page: ReactElement) => {
   return <Layout>{page}</Layout>
 }
 
+/*
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const ids = await getCollectionIds()
 
@@ -131,5 +111,5 @@ export const getStaticProps: GetStaticProps = async (context) => {
     },
   }
 }
-
+*/
 export default CollectionPage

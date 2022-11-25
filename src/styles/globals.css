@@ -110,3 +110,6 @@
     @apply text-[36px] leading-[48px] font-semibold;
   }
 }
+.cursor-pointer{
+  cursor: pointer;
+}

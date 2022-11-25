@@ -1,4 +1,5 @@
 import { medusaClient } from "@lib/config"
+import { useTranslation } from "react-i18next"
 import { Customer } from "@medusajs/medusa"
 import Input from "@modules/common/components/input"
 import { useUpdateMe } from "medusa-react"
@@ -27,7 +28,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
     formState: { errors },
     setError,
   } = useForm<UpdateCustomerPasswordFormData>()
-
+  const { t } = useTranslation()
   const {
     mutate: update,
     isLoading,
@@ -52,9 +53,9 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
     if (!isValid) {
       setError("old_password", {
         type: "validate",
-        message: "Old password is incorrect",
+        message: t("ValidateIsIncorrect", { attribute: t("OldPassword") }),
       })
-      setErrorMessage("Old password is incorrect")
+      setErrorMessage(t("ValidateIsIncorrect", { attribute: t("OldPassword") }))
 
       return
     }
@@ -62,9 +63,9 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
     if (data.new_password !== data.confirm_password) {
       setError("confirm_password", {
         type: "validate",
-        message: "Passwords do not match",
+        message: t("ValidateDoNotMatch", { attribute: t("Passwords") }),
       })
-      setErrorMessage("Passwords do not match")
+      setErrorMessage(t("ValidateDoNotMatch", { attribute: t("Passwords") }))
 
       return
     }
@@ -82,9 +83,9 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
       className="w-full"
     >
       <AccountInfo
-        label="Password"
+        label={t("Password")}
         currentInfo={
-          <span>The password is not shown for security reasons</span>
+          <span>{t("ThePasswordIsNotShownForSecurityReasons")}</span>
         }
         isLoading={isLoading}
         isSuccess={isSuccess}
@@ -94,24 +95,27 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
       >
         <div className="grid grid-cols-2 gap-4">
           <Input
-            label="Old password"
+            label={t("OldPassword")}
             {...register("old_password", {
               required: true,
             })}
             type="password"
+            autoComplete="current-password"
             errors={errors}
           />
           <Input
-            label="New password"
+            label={t("NewPassword")}
             type="password"
             {...register("new_password", { required: true })}
             errors={errors}
+            autoComplete="new-password"
           />
           <Input
-            label="Confirm password"
+            label={t("ConfirmPassword")}
             type="password"
             {...register("confirm_password", { required: true })}
             errors={errors}
+            autoComplete="new-password"
           />
         </div>
       </AccountInfo>

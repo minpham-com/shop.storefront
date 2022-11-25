@@ -1,11 +1,13 @@
 import { medusaClient } from "@lib/config"
 import { LOGIN_VIEW, useAccount } from "@lib/context/account-context"
+import { useTranslation } from "react-i18next"
 import Button from "@modules/common/components/button"
 import Input from "@modules/common/components/input"
 import Spinner from "@modules/common/icons/spinner"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
+import Link from "next/link"
 
 interface SignInCredentials extends FieldValues {
   email: string
@@ -13,13 +15,13 @@ interface SignInCredentials extends FieldValues {
 }
 
 const Login = () => {
-  const { loginView, refetchCustomer } = useAccount()
+  const { setLoginMarkKey, isLoginMarkKey, loginView, refetchCustomer } = useAccount()
   const [_, setCurrentView] = loginView
   const [authError, setAuthError] = useState<string | undefined>(undefined)
   const router = useRouter()
-
+  const { t } = useTranslation()
   const handleError = (_e: Error) => {
-    setAuthError("Invalid email or password")
+    setAuthError(t("InvalidEmailOrPassword"))
   }
 
   const {
@@ -32,6 +34,7 @@ const Login = () => {
     await medusaClient.auth
       .authenticate(credentials)
       .then(() => {
+        setLoginMarkKey(isLoginMarkKey)
         refetchCustomer()
         router.push("/account")
       })
@@ -45,21 +48,25 @@ const Login = () => {
           <Spinner size={24} />
         </div>
       )}
-      <h1 className="text-large-semi uppercase mb-6">Welcome back</h1>
+      <h1 className="text-large-semi uppercase mb-6">{t("WelcomeBack")}</h1>
       <p className="text-center text-base-regular text-gray-700 mb-8">
-        Sign in to access an enhanced shopping experience.
+        {t("SignInToAccessShoppingExperience")}
       </p>
       <form className="w-full" onSubmit={onSubmit}>
         <div className="flex flex-col w-full gap-y-2">
           <Input
-            label="Email"
-            {...register("email", { required: "Email is required" })}
+            label={t("Email")}
+            {...register("email", {
+              required: t("ValidateIsRequired", { attribute: t("Email") }),
+            })}
             autoComplete="email"
             errors={errors}
           />
           <Input
-            label="Password"
-            {...register("password", { required: "Password is required" })}
+            label={t("Password")}
+            {...register("password", {
+              required: t("ValidateIsRequired", { attribute: t("Password") }),
+            })}
             type="password"
             autoComplete="current-password"
             errors={errors}
@@ -68,19 +75,22 @@ const Login = () => {
         {authError && (
           <div>
             <span className="text-rose-500 w-full text-small-regular">
-              These credentials do not match our records
+              {t("InvalidUserOrPassword")}
             </span>
           </div>
         )}
-        <Button className="mt-6">Enter</Button>
+        <span className="text-small-regular mt-6 px-2">
+          <Link href="/account/password/reset">{t("ResetPassword")}</Link>
+        </span>
+        <Button className="mt-6">{t("Login")}</Button>
       </form>
       <span className="text-center text-gray-700 text-small-regular mt-6">
-        Not a member?{" "}
+        {t("NotAMember")}{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
           className="underline"
         >
-          Join us
+          {t("JoinUs")}
         </button>
         .
       </span>

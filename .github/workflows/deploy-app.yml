@@ -9,35 +9,38 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: develop
     env:
-      GS_PROJECT_ID: ${{ secrets.DEV_PROJECT_ID }}
-      GS_CREDENTIALS: ${{ secrets.DEV_GS_CREDENTIALS }}
-      PROJECT_TARGET: ${{ secrets.DEV_PROJECT_TARGET }}
+      PREFIX: ${{ secrets.PREFIX }}
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      GS_CREDENTIALS: ${{ secrets.GS_CREDENTIALS }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Cloud auth
-        uses: 'google-github-actions/auth@v0'
+        uses: "google-github-actions/auth@v1"
         with:
-          credentials_json: '${{ env.GS_CREDENTIALS }}'
+          credentials_json: "${{ env.GS_CREDENTIALS }}"
 
       - name: Set up Cloud SDK
-        uses: 'google-github-actions/setup-gcloud@v0'
+        uses: "google-github-actions/setup-gcloud@v1"
 
       - name: Setup environment
-        run: gcloud secrets versions access latest --secret="${{ env.GS_PROJECT_ID }}-storefront-dev" --out-file=.env.production
+        run: |
+          gcloud secrets versions access latest --secret="${{ env.PROJECT_ID }}-storefront-${{ env.PREFIX }}" --out-file=.env.production
+          gcloud secrets versions access latest --secret="${{ env.PROJECT_ID }}-storefront-json-${{ env.PREFIX }}" --out-file=firebase.json
+          gcloud secrets versions access latest --secret="${{ env.PROJECT_ID }}-storefront-rc-${{ env.PREFIX }}" --out-file=.firebaserc
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: lts/*
+          
       - run: yarn && yarn build && yarn export
-      
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ env.GS_CREDENTIALS }}'
-          channelId: live
-          projectId: '${{ env.GS_PROJECT_ID }}'
-          target: '${{ env.PROJECT_TARGET }}'
+
+      - name: Setup firebase tools
+        run: curl -sL https://firebase.tools | bash
+
+      - name: Deploy app
+        run: firebase deploy --only  hosting --project ${{ env.PROJECT_ID }}

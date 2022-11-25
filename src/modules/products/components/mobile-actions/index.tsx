@@ -7,6 +7,7 @@ import ChevronDown from "@modules/common/icons/chevron-down"
 import X from "@modules/common/icons/x"
 import clsx from "clsx"
 import React, { Fragment, useMemo } from "react"
+import { useTranslation } from "react-i18next"
 import { Product } from "types/medusa"
 import OptionSelect from "../option-select"
 
@@ -16,9 +17,10 @@ type MobileActionsProps = {
 }
 
 const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
-  const { variant, addToCart, options, inStock, updateOptions } = useProductActions()
+  const { variant, addToCart, options, inStock, updateOptions } =
+    useProductActions()
   const { state, open, close } = useToggleState()
-
+  const { t } = useTranslation()
   const price = useProductPrice({ id: product.id, variantId: variant?.id })
 
   const selectedPrice = useMemo(() => {
@@ -75,12 +77,14 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
                   <span>
                     {variant
                       ? Object.values(options).join(" / ")
-                      : "Select Options"}
+                      : t("SelectOptions")}
                   </span>
                   <ChevronDown />
                 </div>
               </Button>
-              <Button onClick={addToCart}>{!inStock ? "Out of stock" : "Add to cart"}</Button>
+              <Button onClick={addToCart}>
+                {!inStock ? t("OutOfStock") : t("AddToCart")}
+              </Button>
             </div>
           </div>
         </Transition>

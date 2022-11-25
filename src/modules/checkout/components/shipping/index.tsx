@@ -8,6 +8,7 @@ import clsx from "clsx"
 import { formatAmount, useCart, useCartShippingOptions } from "medusa-react"
 import React, { useEffect, useMemo } from "react"
 import { Controller, useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import StepContainer from "../step-container"
 
 type ShippingOption = {
@@ -35,7 +36,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
       soId: cart.shipping_methods?.[0]?.shipping_option_id,
     },
   })
-
+  const { t } = useTranslation()
   // Fetch shipping options
   const { shipping_options, refetch } = useCartShippingOptions(cart.id, {
     enabled: !!cart.id,
@@ -60,8 +61,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
             "soId",
             {
               type: "validate",
-              message:
-                "An error occurred while adding shipping. Please try again.",
+              message: t("FailedToAddShippingMessage"),
             },
             { shouldFocus: true }
           ),
@@ -100,7 +100,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
       title="Delivery"
       closedState={
         <div className="px-8 pb-8 text-small-regular">
-          <p>Enter your address to see available delivery options.</p>
+          <p>{t("EnterYourAddressToSeeAvailableDeliveryOptions")}</p>
         </div>
       }
     >

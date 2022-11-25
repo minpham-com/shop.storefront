@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { LineItem, Region } from "@medusajs/medusa"
 import Item from "@modules/cart/components/item"
 import SkeletonLineItem from "@modules/skeletons/components/skeleton-line-item"
@@ -8,10 +9,11 @@ type ItemsTemplateProps = {
 }
 
 const ItemsTemplate = ({ items, region }: ItemsTemplateProps) => {
+  const { t } = useTranslation()
   return (
     <div>
       <div className="border-b border-gray-200 pb-3 flex items-center">
-        <h1 className="text-xl-semi">Shopping Bag</h1>
+        <h1 className="text-xl-semi">{t("ShoppingBag")}</h1>
       </div>
       <div className="grid grid-cols-1 gap-y-8 py-8">
         {items && region

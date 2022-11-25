@@ -19,7 +19,9 @@
     "paths": {
       "@lib/*": ["lib/*"],
       "@modules/*": ["modules/*"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
+      "@locales/*": ["locales/*"],
+      "@type/*": ["types/*"]
     }
   },
   "include": [
@@ -29,7 +31,7 @@
     "cypress/support/index.js",
     "cypress/support/commands.js",
     "cypress/integration/product.spec.js",
-    "cypress/plugins/index.js",
+    "cypress/plugins/index.js", "src/lib/loader/cloudfare.js",
   ],
   "exclude": [
     "node_modules",

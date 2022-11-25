@@ -9,6 +9,7 @@ import {
   StripeCardNumberElementOptions,
 } from "@stripe/stripe-js"
 import React, { useMemo } from "react"
+import { useTranslation } from "react-i18next"
 
 const PaymentStripe: React.FC = () => {
   const useOptions:
@@ -47,10 +48,11 @@ const CardNumber = ({
 }: {
   options: StripeCardNumberElementOptions
 }) => {
+  const { t } = useTranslation()
   return (
     <div className="border-b border-gray-200 py-2 relative">
       <span className="absolute -top-6 text-gray-700 text-base-regular">
-        Card number
+        {t("CardNumber")}
       </span>
       <CardNumberElement options={options} />
     </div>
@@ -62,10 +64,11 @@ const CardExpiry = ({
 }: {
   options: StripeCardExpiryElementOptions
 }) => {
+  const { t } = useTranslation()
   return (
     <div className="border-b border-gray-200 w-full py-2 relative">
       <span className="absolute -top-6 text-gray-700 text-base-regular">
-        Expiration date
+        {t("ExpirationDate")}
       </span>
       <CardExpiryElement options={options} />
     </div>
@@ -73,10 +76,11 @@ const CardExpiry = ({
 }
 
 const CardCVC = ({ options }: { options: StripeCardCvcElementOptions }) => {
+  const { t } = useTranslation()
   return (
     <div className="border-b border-gray-200 w-full py-2 relative">
       <span className="absolute -top-6 text-gray-700 text-base-regular">
-        CVC
+        {t("CVC")}
       </span>
       <CardCvcElement options={{ ...options, placeholder: "123" }} />
     </div>

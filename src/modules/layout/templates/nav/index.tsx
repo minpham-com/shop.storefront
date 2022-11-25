@@ -1,4 +1,5 @@
 import { useMobileMenu } from "@lib/context/mobile-menu-context"
+import { useTranslation } from "react-i18next"
 import Hamburger from "@modules/common/components/hamburger"
 import CartDropdown from "@modules/layout/components/cart-dropdown"
 import DropdownMenu from "@modules/layout/components/dropdown-menu"
@@ -38,7 +39,7 @@ const Nav = () => {
   }, [pathname])
 
   const { toggle } = useMobileMenu()
-
+  const { t } = useTranslation()
   return (
     <div
       className={clsx("sticky top-0 inset-x-0 z-50 group", {
@@ -71,16 +72,16 @@ const Nav = () => {
           </div>
 
           <div className="flex items-center h-full">
-            <Link href="/" className="text-xl-semi uppercase" legacyBehavior>
-              Acme
+            <Link href="/" className="text-xl-semi uppercase" legacyBehavior passHref>
+              <a>{ t('AppName') }</a>
             </Link>
           </div>
 
           <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
             <div className="hidden small:flex items-center gap-x-6 h-full">
               {process.env.FEATURE_SEARCH_ENABLED && <DesktopSearchModal />}
-              <Link href="/account" legacyBehavior>
-                Account
+              <Link href="/account" legacyBehavior passHref>
+                <a>{ t('Account') }</a>
               </Link>
             </div>
             <CartDropdown />

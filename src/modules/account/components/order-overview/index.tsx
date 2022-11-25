@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import Button from "@modules/common/components/button"
 import Spinner from "@modules/common/icons/spinner"
 import { useCustomerOrders } from "medusa-react"
@@ -6,7 +7,7 @@ import OrderCard from "../order-card"
 
 const OrderOverview = () => {
   const { orders, isLoading } = useCustomerOrders()
-
+  const { t } = useTranslation()
   if (isLoading) {
     return (
       <div className="text-gray-900 w-full flex justify-center pt-12">
@@ -32,13 +33,13 @@ const OrderOverview = () => {
 
   return (
     <div className="w-full flex flex-col items-center gap-y-4">
-      <h2 className="text-large-semi">Nothing to see here</h2>
+      <h2 className="text-large-semi">{t("NothingToSeeHere")}</h2>
       <p className="text-base-regular">
-        You don&apos;t have any orders yet, let us change that {":)"}
+        {t("YouDonNotHaveAnyOrdersYet")} {":)"}
       </p>
       <div className="mt-4">
         <Link href="/" passHref>
-          <Button>Continue shopping</Button>
+          <Button>{t("ContinueShopping")}</Button>
         </Link>
       </div>
     </div>
