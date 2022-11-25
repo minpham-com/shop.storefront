@@ -10,6 +10,7 @@ import {
   useState,
 } from "react"
 import { get } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 
 export type NativeSelectProps = {
   placeholder?: string
@@ -20,7 +21,7 @@ export type NativeSelectProps = {
 const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
   (
     {
-      placeholder = "Select...",
+      placeholder = "SelectPlaceHolder",
       errors,
       touched,
       className,
@@ -31,7 +32,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
   ) => {
     const innerRef = useRef<HTMLSelectElement>(null)
     const [isPlaceholder, setIsPlaceholder] = useState(false)
-
+    const { t } = useTranslation()
     useImperativeHandle<HTMLSelectElement | null, HTMLSelectElement | null>(
       ref,
       () => innerRef.current
@@ -67,7 +68,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
             {...props}
             className="appearance-none flex-1 bg-transparent border-none px-4 py-2.5 transition-colors duration-150 focus:border-gray-700 outline-none"
           >
-            <option value="">{placeholder}</option>
+            <option value="">{ t(placeholder) }</option>
             {children}
           </select>
           <span className="absolute right-4 inset-y-0 flex items-center pointer-events-none">

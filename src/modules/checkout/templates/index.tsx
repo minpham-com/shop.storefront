@@ -2,11 +2,13 @@ import { CheckoutProvider } from "@lib/context/checkout-context"
 import ChevronDown from "@modules/common/icons/chevron-down"
 import MedusaCTA from "@modules/layout/components/medusa-cta"
 import Link from "next/link"
+import { useTranslation } from "react-i18next"
 import CheckoutLoader from "../components/checkout-loader"
 import CheckoutForm from "./checkout-form"
 import CheckoutSummary from "./checkout-summary"
 
 const CheckoutTemplate = () => {
+  const { t } = useTranslation()
   return (
     <CheckoutProvider>
       <div className="bg-gray-100 relative small:min-h-screen">
@@ -19,9 +21,9 @@ const CheckoutTemplate = () => {
               <>
                 <ChevronDown className="rotate-90" size={16} />
                 <span className="mt-px hidden small:block">
-                  Back to shopping cart
+                  {t("BackToShoppingCart")}
                 </span>
-                <span className="mt-px block small:hidden">Back</span>
+                <span className="mt-px block small:hidden">{t("Back")}</span>
               </>
             </Link>
             <Link href="/" className="text-xl-semi">

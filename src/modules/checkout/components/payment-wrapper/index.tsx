@@ -4,7 +4,7 @@ import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js"
 import React from "react"
 
 type WrapperProps = {
-  paymentSession?: PaymentSession | null,
+  paymentSession?: PaymentSession | null
   children: any
 }
 

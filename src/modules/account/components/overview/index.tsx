@@ -1,10 +1,13 @@
+import { useTranslation } from "react-i18next"
 import { Customer, Order } from "@medusajs/medusa"
 import ChevronDown from "@modules/common/icons/chevron-down"
 import MapPin from "@modules/common/icons/map-pin"
 import Package from "@modules/common/icons/package"
 import User from "@modules/common/icons/user"
+import EyeOff from "@modules/common/icons/eye-off"
 import { formatAmount } from "medusa-react"
 import Link from "next/link"
+import { useAccount } from "@lib/context/account-context"
 
 type OverviewProps = {
   orders?: Order[]
@@ -12,11 +15,13 @@ type OverviewProps = {
 }
 
 const Overview = ({ orders, customer }: OverviewProps) => {
+  const { t } = useTranslation()
+  const { handleLogout } = useAccount()
   return (
     <div>
       <div className="small:hidden">
         <div className="text-xl-semi mb-4 px-8">
-          Hello {customer?.first_name}
+          {t("Hello")} {customer?.first_name}
         </div>
         <div className="text-base-regular">
           <ul>
@@ -28,9 +33,9 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                 <>
                   <div className="flex items-center gap-x-2">
                     <User size={16} />
-                    <span>Profile</span>
+                    <span>{t("Profile")}</span>
+                    <ChevronDown className="transform -rotate-90" />
                   </div>
-                  <ChevronDown className="transform -rotate-90" />
                 </>
               </Link>
             </li>
@@ -42,9 +47,10 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                 <>
                   <div className="flex items-center gap-x-2">
                     <MapPin size={16} />
-                    <span>Addresses</span>
+                    <span>{t("Addresses")}</span>
+                    <ChevronDown className="transform -rotate-90" />
                   </div>
-                  <ChevronDown className="transform -rotate-90" />
+                  
                 </>
               </Link>
             </li>
@@ -56,10 +62,27 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                 <>
                   <div className="flex items-center gap-x-2">
                     <Package size={16} />
-                    <span>Orders</span>
+                    <span>{t("Orders")}</span>
+                    <ChevronDown className="transform -rotate-90" />
                   </div>
-                  <ChevronDown className="transform -rotate-90" />
+                  
                 </>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/account/orders"
+                className="flex items-center justify-between py-4 border-b border-gray-200 px-8"
+                legacyBehavior
+              >
+                <a className="flex items-center justify-between py-4 border-b border-gray-200 px-8">
+                  <div className="flex items-center gap-x-2">
+                    <EyeOff size={16} />
+                    <span onClick={handleLogout} >{t("LogOut")}</span>
+                    <ChevronDown className="transform -rotate-90" />
+                  </div>
+                  
+                </a>
               </Link>
             </li>
           </ul>
@@ -68,9 +91,11 @@ const Overview = ({ orders, customer }: OverviewProps) => {
 
       <div className="hidden small:block">
         <div className="text-xl-semi flex justify-between items-start mb-4">
-          <span>Hello {customer?.first_name}</span>
+          <span>
+            {t("Hello")} {customer?.first_name}
+          </span>
           <span className="text-small-regular text-gray-700">
-            Signed in as:{" "}
+            {t("SignedInAs")}:{" "}
             <span className="font-semibold">{customer?.email}</span>
           </span>
         </div>
@@ -84,19 +109,19 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                     {getProfileCompletion(customer)}%
                   </span>
                   <span className="uppercase text-base-regular text-gray-500">
-                    Completed
+                    {t("Completed")}
                   </span>
                 </div>
               </div>
 
               <div className="flex flex-col gap-y-4">
-                <h3 className="text-large-semi">Addresses</h3>
+                <h3 className="text-large-semi">{t("Addresses")}</h3>
                 <div className="flex items-end gap-x-2">
                   <span className="text-3xl-semi leading-none">
                     {customer?.shipping_addresses?.length || 0}
                   </span>
                   <span className="uppercase text-base-regular text-gray-500">
-                    Saved
+                    {t("Saved")}
                   </span>
                 </div>
               </div>
@@ -104,7 +129,7 @@ const Overview = ({ orders, customer }: OverviewProps) => {
 
             <div className="flex flex-col gap-y-4">
               <div className="flex items-center gap-x-2">
-                <h3 className="text-large-semi">Recent orders</h3>
+                <h3 className="text-large-semi">{t("RecentOrders")}</h3>
               </div>
               <ul className="flex flex-col gap-y-4">
                 {orders ? (
@@ -133,22 +158,13 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                                 })}
                               </span>
                             </div>
-                            <button
-                              className="flex items-center justify-between"
-                              onClick={close}
-                            >
-                              <span className="sr-only">
-                                Go to order #{order.display_id}
-                              </span>
-                              <ChevronDown className="-rotate-90" />
-                            </button>
                           </div>
                         </Link>
                       </li>
                     )
                   })
                 ) : (
-                  <span>No recent orders</span>
+                  <span>{t("NoRecentOrders")}</span>
                 )}
               </ul>
             </div>

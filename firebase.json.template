@@ -1,0 +1,59 @@
+{
+  "hosting": [{
+    "target": "project-id",
+    "public": "out",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "appAssociation": "AUTO",
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "rewrites": [{
+      "source": "/order/confirmed/**",
+      "destination": "/order/confirmed/[id].html"
+    },{
+      "source": "/order/details/**",
+      "destination": "/order/details/[id].html"
+    },{
+      "source": "/products/**",
+      "destination": "/products/[handle].html"
+    },
+    {
+      "source": "/collections/**",
+      "destination": "/collections/[id].html"
+    },{
+      "source": "**",
+      "dynamicLinks": true
+    }]
+  }, {
+    "target": "project-id-dev",
+    "public": "out",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "appAssociation": "AUTO",
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "rewrites": [{
+      "source": "/order/confirmed/**",
+      "destination": "/order/confirmed/[id].html"
+    },{
+      "source": "/order/details/**",
+      "destination": "/order/details/[id].html"
+    },{
+      "source": "/products/**",
+      "destination": "/products/[handle].html"
+    },
+    {
+      "source": "/collections/**",
+      "destination": "/collections/[id].html"
+    },{
+      "source": "**",
+      "dynamicLinks": true
+    }]
+  }]
+}

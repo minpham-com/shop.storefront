@@ -3,6 +3,7 @@ import {
   useFeaturedProductsQuery,
   useNavigationCollections,
 } from "@lib/hooks/use-layout-data"
+import { useTranslation } from "react-i18next"
 import repeat from "@lib/util/repeat"
 import ProductPreview from "@modules/products/components/product-preview"
 import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview"
@@ -19,7 +20,7 @@ const DropdownMenu = () => {
     useNavigationCollections()
   const { data: products, isLoading: loadingProducts } =
     useFeaturedProductsQuery()
-
+  const { t } = useTranslation()
   return (
     <div
       onMouseEnter={() => setOpen(true)}
@@ -36,7 +37,7 @@ const DropdownMenu = () => {
                 )}
                 onClick={() => push("/store")}
               >
-                Store
+                {t("Store")}
               </Popover.Button>
             </Link>
 
@@ -58,7 +59,7 @@ const DropdownMenu = () => {
                   <div className="flex items-start content-container">
                     <div className="flex flex-col flex-1 max-w-[30%]">
                       <h3 className="text-base-semi text-gray-900 mb-4">
-                        Collections
+                        {t("Collections")}
                       </h3>
                       <div className="flex items-start">
                         {collections &&
@@ -68,7 +69,7 @@ const DropdownMenu = () => {
                                 key={index}
                                 className="min-w-[152px] max-w-[200px] pr-4"
                               >
-                                {chunk.map((collection) => {
+                                {chunk.map((collection: any) => {
                                   return (
                                     <div key={collection.id} className="pb-3">
                                       <Link
@@ -94,7 +95,7 @@ const DropdownMenu = () => {
                     </div>
                     <div className="flex-1">
                       <div className="grid grid-cols-3 gap-4">
-                        {products?.slice(0, 3).map((product) => (
+                        {products?.slice(0, 3).map((product: any) => (
                           <ProductPreview {...product} key={product.id} />
                         ))}
                         {loadingProducts &&

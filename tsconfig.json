@@ -31,6 +31,12 @@
       ],
       "@pages/*": [
         "pages/*"
+      ],
+      "@locales/*": [
+        "locales/*"
+      ],
+      "@type/*": [
+        "types/*"
       ]
     },
     "plugins": [

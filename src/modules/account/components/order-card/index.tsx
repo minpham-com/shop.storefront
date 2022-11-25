@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { Order } from "@medusajs/medusa"
 import Button from "@modules/common/components/button"
 import Thumbnail from "@modules/products/components/thumbnail"
@@ -19,7 +20,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
   const numberOfProducts = useMemo(() => {
     return order.items.length
   }, [order])
-
+  const { t } = useTranslation()
   return (
     <div className="bg-white flex flex-col">
       <div className="uppercase text-large-semi mb-1">#{order.display_id}</div>
@@ -35,7 +36,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
           })}
         </span>
         <span className="pl-2">{`${numberOfLines} ${
-          numberOfLines > 1 ? "items" : "item"
+          numberOfLines > 1 ? t("items") : "item"
         }`}</span>
       </div>
       <div className="grid grid-cols-2 small:grid-cols-4 gap-4 my-4">
@@ -60,7 +61,9 @@ const OrderCard = ({ order }: OrderCardProps) => {
             <span className="text-small-regular text-gray-700">
               + {numberOfLines - 4}
             </span>
-            <span className="text-small-regular text-gray-700">more</span>
+            <span className="text-small-regular text-gray-700">
+              {t("more")}
+            </span>
           </div>
         )}
       </div>

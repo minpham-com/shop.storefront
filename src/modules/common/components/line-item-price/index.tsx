@@ -2,6 +2,7 @@ import { getPercentageDiff } from "@lib/util/get-precentage-diff"
 import { LineItem, Region } from "@medusajs/medusa"
 import clsx from "clsx"
 import { formatAmount } from "medusa-react"
+import { useTranslation } from "react-i18next"
 import { CalculatedVariant } from "types/medusa"
 
 type LineItemPriceProps = {
@@ -18,9 +19,9 @@ const LineItemPrice = ({
   const originalPrice =
     (item.variant as CalculatedVariant).original_price * item.quantity
   const hasReducedPrice = (item.total || 0) < originalPrice
-
+  const { t } = useTranslation()
   return (
-    <div className="flex flex-col text-gray-700 text-right">
+    <div className="flex flex-col text-gray-700 text-left xsmall:text-right">
       <span
         className={clsx("text-base-regular", {
           "text-rose-600": hasReducedPrice,
@@ -36,7 +37,7 @@ const LineItemPrice = ({
         <>
           <p>
             {style === "default" && (
-              <span className="text-gray-500">Original: </span>
+              <span className="text-gray-500">{t("Original")}: </span>
             )}
             <span className="line-through">
               {formatAmount({

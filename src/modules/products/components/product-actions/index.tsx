@@ -1,6 +1,7 @@
 import { useProductActions } from "@lib/context/product-context"
 import useProductPrice from "@lib/hooks/use-product-price"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
+import { useTranslation } from "react-i18next"
 import Button from "@modules/common/components/button"
 import OptionSelect from "@modules/products/components/option-select"
 import clsx from "clsx"
@@ -23,7 +24,7 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
 
     return variantPrice || cheapestPrice || null
   }, [price])
-
+  const { t } = useTranslation()
   return (
     <div className="flex flex-col gap-y-2">
       {product.collection && (
@@ -68,7 +69,7 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
             {selectedPrice.price_type === "sale" && (
               <>
                 <p>
-                  <span className="text-gray-500">Original: </span>
+                  <span className="text-gray-500">{ t('Original') }: </span>
                   <span className="line-through">
                     {selectedPrice.original_price || 0 }
                   </span>
@@ -85,7 +86,7 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
       </div>
 
       <Button onClick={addToCart}>
-        {!inStock ? "Out of stock" : "Add to cart"}
+        {!inStock ? t("OutOfStock") : t("AddToCart") }
       </Button>
     </div>
   )

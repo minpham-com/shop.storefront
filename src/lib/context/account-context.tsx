@@ -3,20 +3,37 @@ import { Customer } from "@medusajs/medusa"
 import { useMutation } from "@tanstack/react-query"
 import { useMeCustomer } from "medusa-react"
 import { useRouter } from "next/router"
-import React, { createContext, useCallback, useContext, useState } from "react"
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+} from "react"
 
 export enum LOGIN_VIEW {
   SIGN_IN = "sign-in",
   REGISTER = "register",
 }
 
+export enum PASSWORD_VIEW {
+  RESET_TOKEN = "reset-token",
+  RESET = "reset",
+}
+
 interface AccountContext {
   customer?: Omit<Customer, "password_hash">
   retrievingCustomer: boolean
   loginView: [LOGIN_VIEW, React.Dispatch<React.SetStateAction<LOGIN_VIEW>>]
+  passwordView: [
+    PASSWORD_VIEW,
+    React.Dispatch<React.SetStateAction<PASSWORD_VIEW>>
+  ]
+  isLoginMarkKey: string
   checkSession: () => void
   refetchCustomer: () => void
   handleLogout: () => void
+  setLoginMarkKey: (val: string) => void
+  isLogin: boolean
 }
 
 const AccountContext = createContext<AccountContext | null>(null)
@@ -29,14 +46,22 @@ const handleDeleteSession = () => {
   return medusaClient.auth.deleteSession()
 }
 
+const isLoginMarkKey = "__sid"
+
+const setLoginMarkKey = (val: string): void => { if( typeof window !== 'undefined'){ localStorage.setItem(isLoginMarkKey, val) } }
+const isLogin = (typeof window !== 'undefined' ? (localStorage.getItem(isLoginMarkKey) || "") : "") === isLoginMarkKey
+
 export const AccountProvider = ({ children }: AccountProviderProps) => {
   const {
     customer,
     isLoading: retrievingCustomer,
     refetch,
     remove,
-  } = useMeCustomer({ onError: () => {} })
+  } = useMeCustomer({ onError: () => {
+    setLoginMarkKey("")
+  }, enabled: isLogin })
   const loginView = useState<LOGIN_VIEW>(LOGIN_VIEW.SIGN_IN)
+  const passwordView = useState<PASSWORD_VIEW>(PASSWORD_VIEW.RESET_TOKEN)
 
   const router = useRouter()
 
@@ -56,6 +81,7 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
       onSuccess: () => {
         remove()
         loginView[1](LOGIN_VIEW.SIGN_IN)
+        setLoginMarkKey("")
         router.push("/")
       },
     })
@@ -67,8 +93,12 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
         customer,
         retrievingCustomer,
         loginView,
+        passwordView,
+        isLoginMarkKey,
         checkSession,
         refetchCustomer: refetch,
+        setLoginMarkKey,
+        isLogin,
         handleLogout,
       }}
     >

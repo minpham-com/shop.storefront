@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import CartTemplate from "@modules/cart/templates"
 import Head from "@modules/common/components/head"
 import Layout from "@modules/layout/templates"
@@ -5,9 +6,11 @@ import { ReactElement } from "react"
 import { NextPageWithLayout } from "types/global"
 
 const Cart: NextPageWithLayout = () => {
+  const { t } = useTranslation()
+  
   return (
     <>
-      <Head title="Shopping Bag" description="View your shopping bag" />
+      <Head title={ t("ShoppingBag") } description={ t("CartPageDescription") } />
       <CartTemplate />
     </>
   )

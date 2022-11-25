@@ -7,7 +7,7 @@ import React, { Fragment } from "react"
 type ModalProps = {
   isOpen: boolean
   close: () => void
-  size?: "small" | "medium" | "large",
+  size?: "small" | "medium" | "large"
   children?: any
 }
 
@@ -63,7 +63,7 @@ const Modal: React.FC<ModalProps> & {
   )
 }
 
-const Title: React.FC = ({ children } :any) => {
+const Title: React.FC = ({ children }: any) => {
   const { close } = useModal()
 
   return (
@@ -78,7 +78,7 @@ const Title: React.FC = ({ children } :any) => {
   )
 }
 
-const Description: React.FC = ({ children } :any) => {
+const Description: React.FC = ({ children }: any) => {
   return (
     <Dialog.Description className="flex text-small-regular text-gray-700 items-center justify-center pt-2 pb-4 h-full">
       {children}
@@ -86,12 +86,12 @@ const Description: React.FC = ({ children } :any) => {
   )
 }
 
-const Body: React.FC = ({ children } :any) => {
+const Body: React.FC = ({ children }: any) => {
   return <div className="flex-1">{children}</div>
 }
 
-const Footer: React.FC = ({ children } : any) => {
-  return <div className="flex items-center justify-end gap-x-4">{children}</div>
+const Footer: React.FC = ({ children }: any) => {
+  return <div className="flex items-center justify-end gap-x-4 mt-4">{children}</div>
 }
 
 Modal.Title = Title

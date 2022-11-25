@@ -1,4 +1,5 @@
 import { useStore } from "@lib/context/store-context"
+import { useTranslation } from "react-i18next"
 import { LineItem, Region } from "@medusajs/medusa"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
@@ -13,16 +14,16 @@ type ItemProps = {
 
 const Item = ({ item, region }: ItemProps) => {
   const { updateItem, deleteItem } = useStore()
-
+  const { t } = useTranslation()
   return (
     <div className="grid grid-cols-[122px_1fr] gap-x-4">
       <div className="w-[122px]">
         <Thumbnail thumbnail={item.thumbnail} size="full" />
       </div>
       <div className="text-base-regular flex flex-col gap-y-8">
-        <div className="flex items-start justify-between">
+        <div className="block xsmall:flex xsmall:items-start xsmall:justify-between">
           <div className="flex flex-col">
-            <span>{item.title}</span>
+            <span title={item.title}>{item.title}</span>
             <LineItemOptions variant={item.variant} />
           </div>
           <NativeSelect
@@ -55,14 +56,14 @@ const Item = ({ item, region }: ItemProps) => {
               })}
           </NativeSelect>
         </div>
-        <div className="flex items-end justify-between text-small-regular flex-1">
+        <div className="block xsmall:flex xsmall:items-end xsmall:justify-between text-small-regular xsmall:flex-1">
           <div>
             <button
               className="flex items-center gap-x-1 text-gray-500"
               onClick={() => deleteItem(item.id)}
             >
               <Trash size={14} />
-              <span>Remove</span>
+              <span>{t("Remove")}</span>
             </button>
           </div>
           <div>

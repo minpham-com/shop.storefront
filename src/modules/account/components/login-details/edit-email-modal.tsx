@@ -1,5 +1,6 @@
 import { useAccount } from "@lib/context/account-context"
 import useToggleState from "@lib/hooks/use-toggle-state"
+import { useTranslation } from "react-i18next"
 import { emailRegex } from "@lib/util/regex"
 import { Customer } from "@medusajs/medusa"
 import EditButton from "@modules/account/components/edit-button"
@@ -23,7 +24,7 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
   const { state, open, close } = useToggleState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | undefined>(undefined)
-
+  const { t } = useTranslation()
   const { mutate } = useUpdateMe()
 
   const {
@@ -44,7 +45,7 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
 
     if (data.email === customer.email) {
       setSubmitting(false)
-      setError("You must enter a new email.")
+      setError(t("YouMustEnterANewEmail"))
       return
     }
 
@@ -58,7 +59,7 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
         },
         onError: () => {
           setSubmitting(false)
-          setError("Unable to update email, try again later.")
+          setError(t("UnableToUpdateEmailTryAgainLater"))
         },
       }
     )
@@ -68,16 +69,16 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
     <div>
       <EditButton onClick={open} />
       <Modal isOpen={state} close={close}>
-        <Modal.Title>Edit your email</Modal.Title>
+        <Modal.Title>{t("EditYourEmail")}</Modal.Title>
         <Modal.Body>
           <div className="flex flex-col w-full">
             <Input
-              label="Email"
+              label={t("Email")}
               {...register("email", {
-                required: "Email is required",
+                required: t("ValidateIsRequired", { attribute: t("Email") }),
                 pattern: {
                   value: emailRegex,
-                  message: "Must be a valid email",
+                  message: t("MustBeAValidEmail"),
                 },
               })}
               errors={errors}
@@ -92,10 +93,10 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
             className="!bg-gray-200 !text-gray-900 !border-gray-200 min-h-0"
             onClick={close}
           >
-            Cancel
+            {t("Cancel")}
           </Button>
           <Button className="min-h-0" onClick={submit} disabled={submitting}>
-            Save
+            {t("Save")}
             {submitting && <Spinner />}
           </Button>
         </Modal.Footer>

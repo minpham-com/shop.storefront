@@ -1,6 +1,7 @@
 import { useMobileMenu } from "@lib/context/mobile-menu-context"
 import { useStore } from "@lib/context/store-context"
 import useCountryOptions from "@lib/hooks/use-country-options"
+import { useTranslation } from "react-i18next"
 import ChevronDown from "@modules/common/icons/chevron-down"
 import X from "@modules/common/icons/x"
 import ReactCountryFlag from "react-country-flag"
@@ -18,7 +19,7 @@ const CountryMenu = () => {
     setRegion(regionId, countryCode)
     close()
   }
-
+  const { t } = useTranslation()
   return (
     <div className="flex flex-col flex-1">
       <div className="flex items-center justify-between w-full border-b border-gray-200 py-4 px-6">
@@ -31,7 +32,7 @@ const CountryMenu = () => {
           </button>
         </div>
         <div>
-          <h1 className="text-large-regular">Shipping To</h1>
+          <h1 className="text-large-regular">{t("ShippingTo")}</h1>
         </div>
         <div className="flex-1 basis-0 flex justify-end">
           <button onClick={close}>

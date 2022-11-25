@@ -1,4 +1,5 @@
 import useEnrichedLineItems from "@lib/hooks/use-enrich-line-items"
+import { useTranslation } from "react-i18next"
 import { LineItem, Region } from "@medusajs/medusa"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
@@ -14,7 +15,7 @@ type ItemsProps = {
 
 const Items = ({ items, region, cartId }: ItemsProps) => {
   const enrichedItems = useEnrichedLineItems(items, cartId)
-
+  const { t } = useTranslation()
   return (
     <div className="p-10 border-b border-gray-200 gap-y-4 flex flex-col">
       {enrichedItems?.length
@@ -26,20 +27,23 @@ const Items = ({ items, region, cartId }: ItemsProps) => {
                 </div>
                 <div className="flex flex-col justify-between flex-1">
                   <div className="flex flex-col flex-1 text-small-regular">
-                    <div className="flex items-start justify-between">
+                    <div className="block xsmall:flex xsmall:items-start xsmall:justify-between">
                       <div>
-                        <h3 className="text-base-regular overflow-ellipsis overflow-hidden whitespace-nowrap mr-4">
+                        <h3 className="text-base-regular overflow-ellipsis overflow-hidden mr-4">
                           <Link
                             href={`/products/${item.variant.product.handle}`}
                             legacyBehavior
+                            passHref
                           >
                             {item.title}
                           </Link>
                         </h3>
                         <LineItemOptions variant={item.variant} />
-                        <span>Quantity: {item.quantity}</span>
+                        <span>
+                          {t("Quantity")}: {item.quantity}
+                        </span>
                       </div>
-                      <div className="flex justify-end">
+                      <div className="xsmall:flex xsmall:justify-end">
                         <LineItemPrice region={region} item={item} />
                       </div>
                     </div>

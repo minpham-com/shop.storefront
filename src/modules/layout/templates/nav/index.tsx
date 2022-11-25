@@ -1,4 +1,5 @@
 import { useMobileMenu } from "@lib/context/mobile-menu-context"
+import { useTranslation } from "react-i18next"
 import Hamburger from "@modules/common/components/hamburger"
 import CartDropdown from "@modules/layout/components/cart-dropdown"
 import DropdownMenu from "@modules/layout/components/dropdown-menu"
@@ -38,7 +39,7 @@ const Nav = () => {
   }, [pathname])
 
   const { toggle } = useMobileMenu()
-
+  const { t } = useTranslation()
   return (
     <div
       className={clsx("sticky top-0 inset-x-0 z-50 group", {

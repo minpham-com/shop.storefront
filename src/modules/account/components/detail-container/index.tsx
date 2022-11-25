@@ -1,13 +1,13 @@
 import React from "react"
 
 type DetailProps = {
-  title: string,
-  children? :any
+  title: string
+  children?: any
 }
 
 type SubDetailProps = {
-  title?: string,
-  children? :any
+  title?: string
+  children?: any
 }
 
 const Detail: React.FC<DetailProps> & {
