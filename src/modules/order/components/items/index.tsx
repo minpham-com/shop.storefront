@@ -35,7 +35,7 @@ const Items = ({ items, region, cartId }: ItemsProps) => {
                             legacyBehavior
                             passHref
                           >
-                            <>{item.title}</>
+                            <a>{item.title}</a>
                           </Link>
                         </h3>
                         <LineItemOptions variant={item.variant} />

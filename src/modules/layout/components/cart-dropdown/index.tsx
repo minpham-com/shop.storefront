@@ -68,7 +68,7 @@ const CartDropdown = () => {
                                     legacyBehavior
                                     passHref
                                   >
-                                    <>{item.title}</>
+                                    <a>{item.title}</a>
                                   </Link>
                                 </h3>
                                 <LineItemOptions variant={item.variant} />

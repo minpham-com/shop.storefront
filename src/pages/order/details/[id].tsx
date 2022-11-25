@@ -46,5 +46,4 @@ const Confirmed: NextPageWithLayout = () => {
 Confirmed.getLayout = (page: ReactElement) => {
   return <Layout>{page}</Layout>
 }
-
 export default Confirmed

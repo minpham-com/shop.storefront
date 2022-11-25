@@ -5,6 +5,8 @@ const store = require("./store.config.json")
 
 //const isProduction = process.env.NODE_ENV === 'production'
 
+//const isProduction = process.env.NODE_ENV === 'production'
+
 module.exports = withStoreConfig({
   experimental: { esmExternals: true },
   features: store.features,
