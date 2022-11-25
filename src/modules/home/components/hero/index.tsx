@@ -27,7 +27,11 @@ const Hero = () => {
         loading="eager"
         priority={true}
         quality={90}
+<<<<<<< HEAD
         alt="Photo by @unsplash"
+=======
+        alt="Photo by @thevoncomplex https://unsplash.com/@thevoncomplex"
+>>>>>>> 36cea15 (Start develop)
         className="absolute inset-0"
         draggable="false"
       />
