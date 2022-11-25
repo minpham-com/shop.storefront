@@ -21,7 +21,7 @@ const UnderlineLink = ({ href, children }: UnderlineLinkProps) => {
             size={20}
             className="transition-all group-hover:ml-2 duration-300"
           />
-        </>
+        </a>
       </Link>
     </div>
   )
