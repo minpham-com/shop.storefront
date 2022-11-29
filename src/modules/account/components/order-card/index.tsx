@@ -1,3 +1,4 @@
+import useTranslation from "@lib/hooks/use-translation"
 import { Order } from "@medusajs/medusa"
 import Button from "@modules/common/components/button"
 import Thumbnail from "@modules/products/components/thumbnail"
@@ -19,7 +20,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
   const numberOfProducts = useMemo(() => {
     return order.items.length
   }, [order])
-
+  const { t } = useTranslation()
   return (
     <div className="bg-white flex flex-col">
       <div className="uppercase text-large-semi mb-1">#{order.display_id}</div>
@@ -60,13 +61,13 @@ const OrderCard = ({ order }: OrderCardProps) => {
             <span className="text-small-regular text-gray-700">
               + {numberOfLines - 4}
             </span>
-            <span className="text-small-regular text-gray-700">more</span>
+            <span className="text-small-regular text-gray-700">{ t('more') }</span>
           </div>
         )}
       </div>
       <div className="flex justify-end">
         <Link href={`/order/details/${order.id}`} legacyBehavior>
-          <Button variant="secondary">See details</Button>
+          <Button variant="secondary">{ t('SeeDetails') }</Button>
         </Link>
       </div>
     </div>

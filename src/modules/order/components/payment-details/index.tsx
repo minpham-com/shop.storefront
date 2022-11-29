@@ -1,3 +1,4 @@
+import useTranslation from "@lib/hooks/use-translation"
 import { Payment, PaymentStatus } from "@medusajs/medusa"
 
 type PaymentDetailsProps = {
@@ -6,9 +7,10 @@ type PaymentDetailsProps = {
 }
 
 const PaymentDetails = ({ payments, paymentStatus }: PaymentDetailsProps) => {
+  const { t } = useTranslation()
   return (
     <div>
-      <h2 className="text-base-semi">Payment</h2>
+      <h2 className="text-base-semi">{ t('Payment') }</h2>
       <div className="my-2">
         {payments.map((p) => {
           switch (p.provider_id) {
@@ -28,10 +30,11 @@ const PaymentDetails = ({ payments, paymentStatus }: PaymentDetailsProps) => {
 }
 
 const PayPalDetails = () => {
+  const { t } = useTranslation()
   return (
     <div className="flex flex-col text-base-regular">
-      <span className="text-small-regular text-gray-700">PayPal</span>
-      <span>PayPal payment</span>
+      <span className="text-small-regular text-gray-700">{ t('PayPal') }</span>
+      <span>{ t('PayPalPayment') }</span>
     </div>
   )
 }
@@ -60,10 +63,11 @@ const StripeDetails = ({ payment }: { payment: Payment }) => {
 }
 
 const TestDetails = () => {
+  const { t } = useTranslation()
   return (
     <div className="flex flex-col text-base-regular">
-      <span className="text-small-regular text-gray-700">Test</span>
-      <span>Test payment using medusa-payment-manual</span>
+      <span className="text-small-regular text-gray-700">{ t('Test') }</span>
+      <span>{ ('TestPayment') }</span>
     </div>
   )
 }

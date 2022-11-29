@@ -1,3 +1,4 @@
+import useTranslation from "@lib/hooks/use-translation"
 import { Cart } from "@medusajs/medusa"
 import Button from "@modules/common/components/button"
 import CartTotals from "@modules/common/components/cart-totals"
@@ -8,11 +9,12 @@ type SummaryProps = {
 }
 
 const Summary = ({ cart }: SummaryProps) => {
+  const { t } = useTranslation()
   return (
     <div className="grid grid-cols-1 gap-y-6">
       <CartTotals cart={cart} />
       <Link href="/checkout" legacyBehavior>
-        <Button>Go to checkout</Button>
+        <Button>{ t('GoToCheckout') }</Button>
       </Link>
     </div>
   )

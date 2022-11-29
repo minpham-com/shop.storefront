@@ -1,15 +1,17 @@
+import useTranslation from "@lib/hooks/use-translation"
 import React from "react"
 
 const EditButton: React.FC<React.HTMLAttributes<HTMLButtonElement>> = (
   props
 ) => {
+  const { t } = useTranslation()
   return (
     <div>
       <button
         className="underline text-small-regular text-gray-700 mt-2"
         {...props}
       >
-        Edit
+        { t('Edit') }
       </button>
     </div>
   )

@@ -1,4 +1,5 @@
 import { useCheckout } from "@lib/context/checkout-context"
+import useTranslation from "@lib/hooks/use-translation"
 import Spinner from "@modules/common/icons/spinner"
 import { useEffect } from "react"
 import PaymentContainer from "../payment-container"
@@ -11,7 +12,7 @@ const Payment = () => {
     initPayment,
     sameAsBilling: { state: isSame },
   } = useCheckout()
-
+  const { t } = useTranslation()
   /**
    * Fallback if the payment session are not loaded properly we
    * retry to load them after a 5 second delay.
@@ -39,7 +40,7 @@ const Payment = () => {
       index={isSame ? 3 : 4}
       closedState={
         <div className="px-8 pb-8 text-small-regular">
-          <p>Enter your address to see available payment options.</p>
+          <p>{ t('EnterYourAddressToSeeAvailablePaymentOptions') }</p>
         </div>
       }
     >

@@ -1,3 +1,4 @@
+import useTranslation from "@lib/hooks/use-translation"
 import { Order } from "@medusajs/medusa"
 
 type OrderDetailsProps = {
@@ -6,6 +7,7 @@ type OrderDetailsProps = {
 }
 
 const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
+  const { t } = useTranslation()
   const items = order.items.reduce((acc, i) => acc + i.quantity, 0)
 
   const formatStatus = (str: string) => {
@@ -17,7 +19,7 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
   return (
     <div className="p-10 border-b border.gray-200">
       <span className="text-gray-700 text-small-regular uppercase">
-        Thank you, your order was successfully placed
+        { t('ThankYouOrderSuccessfully') }
       </span>
       <h1 className="mt-2 uppercase text-2xl-semi">#{order.display_id}</h1>
       <span>{order.id.split("order_")[1]}</span>

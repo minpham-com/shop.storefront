@@ -1,3 +1,4 @@
+import useTranslation from "@lib/hooks/use-translation"
 import { ProductHit } from "@modules/search/components/hit"
 import React from "react"
 import {
@@ -18,7 +19,7 @@ const MobileHits = ({
 }: HitsProps<ProductHit>) => {
   const { hits } = useHits(props)
   const { query } = useSearchBox()
-
+  const { t } = useTranslation()
   // If the query is empty, we don't want to show the initial hits
   if (!!query === false || !hits.length) {
     return null
@@ -27,7 +28,7 @@ const MobileHits = ({
   return (
     <div className={className}>
       <span className="text-small-regular uppercase text-gray-700">
-        Results
+        { t('Results') }
       </span>
       <div className="grid grid-cols-1 py-4">
         {hits.map((hit, index) => (

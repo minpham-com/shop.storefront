@@ -1,20 +1,20 @@
 import { useAccount } from "@lib/context/account-context"
+import useTranslation from "@lib/hooks/use-translation"
 import AddressBook from "../components/address-book"
 
 const AddressesTemplate = () => {
   const { customer, retrievingCustomer } = useAccount()
-
+  const { t } = useTranslation()
   if (retrievingCustomer || !customer) {
     return null
   }
-
+  
   return (
     <div className="w-full">
       <div className="mb-8 flex flex-col gap-y-4">
-        <h1 className="text-2xl-semi">Shipping Addresses</h1>
+        <h1 className="text-2xl-semi">{ t('ShippingAddresses') }</h1>
         <p className="text-base-regular">
-          View and update your shipping addresses, you can add as many as you
-          like. Saving your addresses will make them available during checkout.
+          { t('ShippingAddressesNote') }
         </p>
       </div>
       <AddressBook customer={customer} />

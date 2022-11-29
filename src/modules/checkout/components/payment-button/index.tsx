@@ -1,4 +1,5 @@
 import { useCheckout } from "@lib/context/checkout-context"
+import useTranslation from "@lib/hooks/use-translation"
 import { PaymentSession } from "@medusajs/medusa"
 import Button from "@modules/common/components/button"
 import Spinner from "@modules/common/icons/spinner"
@@ -15,7 +16,7 @@ type PaymentButtonProps = {
 const PaymentButton: React.FC<PaymentButtonProps> = ({ paymentSession }) => {
   const [notReady, setNotReady] = useState(true)
   const { cart } = useCart()
-
+  const { t } = useTranslation()
   useEffect(() => {
     setNotReady(true)
 
@@ -54,7 +55,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ paymentSession }) => {
         <PayPalPaymentButton notReady={notReady} session={paymentSession} />
       )
     default:
-      return <Button disabled>Select a payment method</Button>
+      return <Button disabled>{ t('SelectAPaymentMethod') }</Button>
   }
 }
 
@@ -70,7 +71,7 @@ const StripePaymentButton = ({
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
     undefined
   )
-
+  const { t } = useTranslation()
   const { cart } = useCart()
   const { onPaymentCompleted } = useCheckout()
 
@@ -151,7 +152,7 @@ const StripePaymentButton = ({
         disabled={submitting || disabled || notReady}
         onClick={handlePayment}
       >
-        {submitting ? <Spinner /> : "Checkout"}
+        {submitting ? <Spinner /> : t("Checkout")}
       </Button>
       {errorMessage && (
         <div className="text-red-500 text-small-regular mt-2">
@@ -175,7 +176,7 @@ const PayPalPaymentButton = ({
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
     undefined
   )
-
+  const { t } = useTranslation()
   const { cart } = useCart()
   const { onPaymentCompleted } = useCheckout()
 
@@ -187,13 +188,13 @@ const PayPalPaymentButton = ({
       ?.authorize()
       .then((authorization) => {
         if (authorization.status !== "COMPLETED") {
-          setErrorMessage(`An error occurred, status: ${authorization.status}`)
+          setErrorMessage(t('AnErrorOccurredStatus', { status: authorization.status } ))
           return
         }
         onPaymentCompleted()
       })
       .catch(() => {
-        setErrorMessage(`An unknown error occurred, please try again.`)
+        setErrorMessage(t('AnUnknownErrorOccurredPleaseTryAgain'))
       })
       .finally(() => {
         setSubmitting(false)
@@ -224,7 +225,7 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
   const [submitting, setSubmitting] = useState(false)
 
   const { onPaymentCompleted } = useCheckout()
-
+  const { t } = useTranslation()
   const handlePayment = () => {
     setSubmitting(true)
 
@@ -235,7 +236,7 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
 
   return (
     <Button disabled={submitting || notReady} onClick={handlePayment}>
-      {submitting ? <Spinner /> : "Checkout"}
+      {submitting ? <Spinner /> : t("Checkout")}
     </Button>
   )
 }

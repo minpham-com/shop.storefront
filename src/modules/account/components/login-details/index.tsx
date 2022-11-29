@@ -1,3 +1,4 @@
+import useTranslation from "@lib/hooks/use-translation"
 import { Customer } from "@medusajs/medusa"
 import React from "react"
 import Detail from "../detail-container"
@@ -9,14 +10,15 @@ type LoginDetailsProps = {
 }
 
 const LoginDetails: React.FC<LoginDetailsProps> = ({ customer }) => {
+  const { t } = useTranslation()
   return (
-    <Detail title="Login">
+    <Detail title={ t("Login") }>
       <div className="flex flex-col gap-y-4">
-        <Detail.SubDetail title="Email">
+        <Detail.SubDetail title={ t("Email") }>
           <span>{customer.email}</span>
           <EditEmailModal customer={customer} />
         </Detail.SubDetail>
-        <Detail.SubDetail title="Password">
+        <Detail.SubDetail title={ t("Password") }>
           <span>•••••••••••</span>
           <EditPasswordModal customer={customer} />
         </Detail.SubDetail>

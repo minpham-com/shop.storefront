@@ -1,3 +1,4 @@
+import useTranslation from "@lib/hooks/use-translation"
 import { Image as MedusaImage } from "@medusajs/medusa"
 import Image from "next/image"
 import { useRef } from "react"
@@ -8,7 +9,7 @@ type ImageGalleryProps = {
 
 const ImageGallery = ({ images }: ImageGalleryProps) => {
   const imageRefs = useRef<(HTMLDivElement | null)[]>([])
-
+  const { t } = useTranslation()
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
@@ -32,7 +33,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 handleScrollTo(image.id)
               }}
             >
-              <span className="sr-only">Go to image {index + 1}</span>
+              <span className="sr-only">{ t('GoToImage', { index: index + 1 }) }</span>
               <Image
                 src={image.url}
                 layout="fill"

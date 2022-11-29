@@ -1,4 +1,5 @@
 import { useMobileMenu } from "@lib/context/mobile-menu-context"
+import useTranslation from "@lib/hooks/use-translation"
 import { searchClient, SEARCH_INDEX_NAME } from "@lib/search-client"
 import Search from "@modules/common/icons/search"
 import MobileHit from "@modules/search/components/mobile-hit"
@@ -10,7 +11,7 @@ const SearchMenu = () => {
   const {
     screen: [_, setScreen],
   } = useMobileMenu()
-
+  const { t } = useTranslation()
   return (
     <InstantSearch searchClient={searchClient} indexName={SEARCH_INDEX_NAME}>
       <div className="flex flex-col flex-1">
@@ -26,7 +27,7 @@ const SearchMenu = () => {
               onClick={() => setScreen("main")}
               className="text-small-semi uppercase"
             >
-              Cancel
+              { t('Cancel') }
             </button>
           </div>
         </div>

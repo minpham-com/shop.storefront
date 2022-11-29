@@ -1,3 +1,4 @@
+import useTranslation from "@lib/hooks/use-translation"
 import AccountLayout from "@modules/account/templates/account-layout"
 import ProfileTemplate from "@modules/account/templates/profile-template"
 import Head from "@modules/common/components/head"
@@ -6,9 +7,10 @@ import { ReactElement } from "react"
 import { NextPageWithLayout } from "types/global"
 
 const Profile: NextPageWithLayout = () => {
+  const { t } = useTranslation()
   return (
     <>
-      <Head title="Profile" description="View and edit your ACME profile." />
+      <Head title={ t("Profile") } description={ t("ViewAndEditYourProfile") } />
       <ProfileTemplate />
     </>
   )

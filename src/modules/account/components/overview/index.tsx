@@ -1,3 +1,4 @@
+import useTranslation from "@lib/hooks/use-translation"
 import { Customer, Order } from "@medusajs/medusa"
 import ChevronDown from "@modules/common/icons/chevron-down"
 import MapPin from "@modules/common/icons/map-pin"
@@ -12,11 +13,12 @@ type OverviewProps = {
 }
 
 const Overview = ({ orders, customer }: OverviewProps) => {
+  const { t } = useTranslation()
   return (
     <div>
       <div className="small:hidden">
         <div className="text-xl-semi mb-4 px-8">
-          Hello {customer?.first_name}
+          { t('Hello') } {customer?.first_name}
         </div>
         <div className="text-base-regular">
           <ul>
@@ -25,7 +27,7 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                 <>
                   <div className="flex items-center gap-x-2">
                     <User size={16} />
-                    <span>Profile</span>
+                    <span>{ t('Profile') }</span>
                   </div>
                   <ChevronDown className="transform -rotate-90" />
                 </>
@@ -36,7 +38,7 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                 <>
                   <div className="flex items-center gap-x-2">
                     <MapPin size={16} />
-                    <span>Addresses</span>
+                    <span>{ t('Addresses') }</span>
                   </div>
                   <ChevronDown className="transform -rotate-90" />
                 </>
@@ -47,7 +49,7 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                 <>
                   <div className="flex items-center gap-x-2">
                     <Package size={16} />
-                    <span>Orders</span>
+                    <span>{ t('Orders') }</span>
                   </div>
                   <ChevronDown className="transform -rotate-90" />
                 </>

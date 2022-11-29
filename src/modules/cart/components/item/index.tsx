@@ -1,4 +1,5 @@
 import { useStore } from "@lib/context/store-context"
+import useTranslation from "@lib/hooks/use-translation"
 import { LineItem, Region } from "@medusajs/medusa"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
@@ -13,7 +14,7 @@ type ItemProps = {
 
 const Item = ({ item, region }: ItemProps) => {
   const { updateItem, deleteItem } = useStore()
-
+  const { t } = useTranslation()
   return (
     <div className="grid grid-cols-[122px_1fr] gap-x-4">
       <div className="w-[122px]">
@@ -54,7 +55,7 @@ const Item = ({ item, region }: ItemProps) => {
               onClick={() => deleteItem(item.id)}
             >
               <Trash size={14} />
-              <span>Remove</span>
+              <span>{ t('Remove') }</span>
             </button>
           </div>
           <div>
