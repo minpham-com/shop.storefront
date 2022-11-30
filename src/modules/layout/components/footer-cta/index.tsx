@@ -16,10 +16,10 @@ const FooterCTA = () => {
 
         <div className="relative w-full aspect-square small:w-[35%] small:aspect-[28/36]">
           <Image
+            fill
+            style={{ objectFit: "cover" }}
             src="/cta_three.jpg"
             alt=""
-            layout="fill"
-            objectFit="cover"
             className="absolute inset-0"
           />
         </div>

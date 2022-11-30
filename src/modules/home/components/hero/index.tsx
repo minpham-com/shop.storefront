@@ -18,11 +18,11 @@ const Hero = () => {
       </div>
       <Image
         src="/hero.jpg"
-        layout="fill"
+        fill
+        style={{ objectFit: "cover" }}
         loading="eager"
         priority={true}
         quality={90}
-        objectFit="cover"
         alt="Photo by @thevoncomplex https://unsplash.com/@thevoncomplex"
         className="absolute inset-0"
         draggable="false"

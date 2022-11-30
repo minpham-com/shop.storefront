@@ -36,8 +36,8 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
               <span className="sr-only">{ t('GoToImage', { index: index + 1 }) }</span>
               <Image
                 src={image.url}
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: "cover" }}
                 className="absolute inset-0"
                 alt="Thumbnail"
               />
@@ -56,8 +56,8 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
             >
               <Image
                 src={image.url}
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: "cover" }}
                 priority={index <= 2 ? true : false}
                 className="absolute inset-0"
                 alt={`Product image ${index + 1}`}
