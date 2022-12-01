@@ -1,5 +1,5 @@
 import { Tab } from "@headlessui/react"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import { Product } from "@medusajs/medusa"
 import Back from "@modules/common/icons/back"
 import FastDelivery from "@modules/common/icons/fast-delivery"
@@ -24,7 +24,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
         component: <ShippingInfoTab />,
       },
     ]
-  }, [product])
+  }, [product, t])
 
   return (
     <div>

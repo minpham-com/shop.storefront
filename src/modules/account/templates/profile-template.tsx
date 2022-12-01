@@ -1,5 +1,5 @@
 import { useAccount } from "@lib/context/account-context"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import ProfileEmail from "@modules/account/components/profile-email"
 import ProfileName from "@modules/account/components/profile-name"
 import ProfilePassword from "@modules/account/components/profile-password"

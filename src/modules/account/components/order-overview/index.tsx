@@ -1,4 +1,4 @@
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import Button from "@modules/common/components/button"
 import Spinner from "@modules/common/icons/spinner"
 import { useCustomerOrders } from "medusa-react"

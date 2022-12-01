@@ -1,4 +1,4 @@
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import React from "react"
 
 const EditButton: React.FC<React.HTMLAttributes<HTMLButtonElement>> = (

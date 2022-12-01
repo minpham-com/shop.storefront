@@ -3,7 +3,7 @@ import {
   useFeaturedProductsQuery,
   useNavigationCollections,
 } from "@lib/hooks/use-layout-data"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import repeat from "@lib/util/repeat"
 import ProductPreview from "@modules/products/components/product-preview"
 import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview"

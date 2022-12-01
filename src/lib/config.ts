@@ -15,6 +15,9 @@ const queryClient = new QueryClient({
 })
 
 const medusaClient = new Medusa({ baseUrl: MEDUSA_BACKEND_URL, maxRetries: 3 })
-const localeSupports = ["vi", "en"];
-const localeDefault = process.env.LOCALE_DEFAULT || 'en'
-export { MEDUSA_BACKEND_URL, queryClient, medusaClient, localeSupports, localeDefault }
+const localeSupports : string[] = ["vi", "en"];
+const localeMaps: { [key: string] : any} = { vi : { name: "Việt Nam", flag: "vn", code: "vi" }, en: { name: "English", flag: "us", code: "en" } };
+
+const localeDefault :string = process.env.LOCALE_DEFAULT || 'vi'
+const localeKey :string = process.env.LOCALE_KEY || '__lang'
+export { MEDUSA_BACKEND_URL, queryClient, medusaClient, localeSupports, localeDefault, localeKey, localeMaps }

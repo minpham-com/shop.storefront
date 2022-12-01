@@ -1,5 +1,5 @@
 import { useFeaturedProductsQuery } from "@lib/hooks/use-layout-data"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import UnderlineLink from "@modules/common/components/underline-link"
 import ProductPreview from "@modules/products/components/product-preview"
 import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview"

@@ -5,16 +5,17 @@ import Search from "@modules/common/icons/search"
 import DesktopHit from "@modules/search/components/desktop-hit"
 import DesktopHits from "@modules/search/components/desktop-hits"
 import SearchBox from "@modules/search/components/search-box"
+import { useTranslation } from "react-i18next"
 import { InstantSearch } from "react-instantsearch-hooks-web"
 
 const DesktopSearchModal = () => {
   const { state, close, open } = useToggleState()
-
+  const { t } = useTranslation()
   return (
     <>
       <button onClick={open} className="flex items-center gap-x-2 h-full">
         <Search />
-        Search
+        { t('Search') }
       </button>
 
       <Modal isOpen={state} close={close} size="large">

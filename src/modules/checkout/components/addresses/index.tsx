@@ -1,5 +1,5 @@
 import { useCheckout } from "@lib/context/checkout-context"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import Button from "@modules/common/components/button"
 import Checkbox from "@modules/common/components/checkbox"
 import Spinner from "@modules/common/icons/spinner"

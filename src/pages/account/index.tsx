@@ -1,4 +1,4 @@
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import AccountLayout from "@modules/account/templates/account-layout"
 import OverviewTemplate from "@modules/account/templates/overview-template"
 import Head from "@modules/common/components/head"

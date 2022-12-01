@@ -1,4 +1,4 @@
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import { Customer, Order } from "@medusajs/medusa"
 import ChevronDown from "@modules/common/icons/chevron-down"
 import MapPin from "@modules/common/icons/map-pin"

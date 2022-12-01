@@ -7,6 +7,7 @@ import { CartProvider, MedusaProvider } from "medusa-react"
 import { Hydrate } from "react-query"
 import "styles/globals.css"
 import { AppPropsWithLayout } from "types/global"
+import '@locales/index';
 
 function App({
   Component,

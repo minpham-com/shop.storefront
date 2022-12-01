@@ -1,6 +1,6 @@
 import { medusaClient } from "@lib/config"
 import { IS_BROWSER } from "@lib/constants"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import Head from "@modules/common/components/head"
 import Layout from "@modules/layout/templates"
 import OrderCompletedTemplate from "@modules/order/templates/order-completed-template"
@@ -45,8 +45,8 @@ const Confirmed: NextPageWithLayout = () => {
     return (
       <>
         <Head
-          title={ t("OrderConfirmed") }
-          description={ t("YouPurchaseWasSuccessful") }
+          title={t("OrderConfirmed")}
+          description={t("YouPurchaseWasSuccessful")}
         />
 
         <OrderCompletedTemplate order={data} />

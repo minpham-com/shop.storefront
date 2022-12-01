@@ -1,4 +1,4 @@
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import { StoreGetProductsParams } from "@medusajs/medusa"
 import { useCollections } from "medusa-react"
 import { ChangeEvent } from "react"

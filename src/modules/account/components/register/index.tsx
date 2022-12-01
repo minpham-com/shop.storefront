@@ -1,6 +1,6 @@
 import { medusaClient } from "@lib/config"
 import { LOGIN_VIEW, useAccount } from "@lib/context/account-context"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import Button from "@modules/common/components/button"
 import Input from "@modules/common/components/input"
 import Link from "next/link"

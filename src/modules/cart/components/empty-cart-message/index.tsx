@@ -1,4 +1,4 @@
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import UnderlineLink from "@modules/common/components/underline-link"
 
 const EmptyCartMessage = () => {

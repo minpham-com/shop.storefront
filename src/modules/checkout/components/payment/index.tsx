@@ -1,5 +1,5 @@
 import { useCheckout } from "@lib/context/checkout-context"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import Spinner from "@modules/common/icons/spinner"
 import { useEffect } from "react"
 import PaymentContainer from "../payment-container"

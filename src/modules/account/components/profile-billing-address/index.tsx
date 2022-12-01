@@ -1,5 +1,5 @@
 import { useAccount } from "@lib/context/account-context"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import { Customer, StorePostCustomersCustomerReq } from "@medusajs/medusa"
 import Input from "@modules/common/components/input"
 import NativeSelect from "@modules/common/components/native-select"
@@ -130,7 +130,7 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({ customer }) => {
         <span>{country}</span>
       </div>
     )
-  }, [customer, regionOptions])
+  }, [customer, regionOptions, t])
 
   return (
     <form

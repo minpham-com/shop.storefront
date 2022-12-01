@@ -1,5 +1,5 @@
 import { medusaClient } from "@lib/config"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import { Cart } from "@medusajs/medusa"
 import Button from "@modules/common/components/button"
 import Input from "@modules/common/components/input"
@@ -45,7 +45,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
       default:
         return t("FreeShipping")
     }
-  }, [discounts, region])
+  }, [discounts, region, t])
 
   const {
     register,

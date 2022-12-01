@@ -1,5 +1,5 @@
 import { useAccount } from "@lib/context/account-context"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import ChevronDown from "@modules/common/icons/chevron-down"
 import clsx from "clsx"
 import Link from "next/link"

@@ -1,4 +1,4 @@
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import { Cart } from "@medusajs/medusa"
 import Button from "@modules/common/components/button"
 import CartTotals from "@modules/common/components/cart-totals"

@@ -1,4 +1,4 @@
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import { Customer } from "@medusajs/medusa"
 import React from "react"
 import Detail from "../detail-container"

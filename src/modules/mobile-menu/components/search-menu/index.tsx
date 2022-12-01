@@ -1,5 +1,5 @@
 import { useMobileMenu } from "@lib/context/mobile-menu-context"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import { searchClient, SEARCH_INDEX_NAME } from "@lib/search-client"
 import Search from "@modules/common/icons/search"
 import MobileHit from "@modules/search/components/mobile-hit"

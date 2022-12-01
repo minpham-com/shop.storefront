@@ -1,4 +1,4 @@
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import { StoreGetProductsParams } from "@medusajs/medusa"
 import Head from "@modules/common/components/head"
 import Layout from "@modules/layout/templates"
@@ -12,7 +12,7 @@ const Store: NextPageWithLayout = () => {
   const { t } = useTranslation()
   return (
     <>
-      <Head title={ t("Store") } description={ t("StoreDescription") } />
+      <Head title={t("Store")} description={t("StoreDescription")} />
       <div className="flex flex-col small:flex-row small:items-start py-6">
         <RefinementList refinementList={params} setRefinementList={setParams} />
         <InfiniteProducts params={params} />

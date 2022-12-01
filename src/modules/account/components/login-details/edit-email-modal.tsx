@@ -1,6 +1,6 @@
 import { useAccount } from "@lib/context/account-context"
 import useToggleState from "@lib/hooks/use-toggle-state"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import { emailRegex } from "@lib/util/regex"
 import { Customer } from "@medusajs/medusa"
 import EditButton from "@modules/account/components/edit-button"

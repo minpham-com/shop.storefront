@@ -1,5 +1,5 @@
 import { useAccount } from "@lib/context/account-context"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import UnderlineLink from "@modules/common/components/underline-link"
 import Spinner from "@modules/common/icons/spinner"
 import React, { useEffect } from "react"

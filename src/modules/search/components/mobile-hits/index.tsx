@@ -1,4 +1,4 @@
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import { ProductHit } from "@modules/search/components/hit"
 import React from "react"
 import {

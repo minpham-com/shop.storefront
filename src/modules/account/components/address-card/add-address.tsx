@@ -1,7 +1,7 @@
 import { medusaClient } from "@lib/config"
 import { useAccount } from "@lib/context/account-context"
 import useToggleState from "@lib/hooks/use-toggle-state"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import CountrySelect from "@modules/checkout/components/country-select"
 import Button from "@modules/common/components/button"
 import Input from "@modules/common/components/input"

@@ -5,7 +5,7 @@ class MyDocument extends Document {
   render() {
     const uri = MEDUSA_BACKEND_URL
     const { hostname } = new URL(uri)
-
+    
     return (
       <Html lang="en">
         <Head>

@@ -1,4 +1,4 @@
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import UnderlineLink from "@modules/common/components/underline-link"
 import Image from "next/image"
 
@@ -16,10 +16,10 @@ const FooterCTA = () => {
 
         <div className="relative w-full aspect-square small:w-[35%] small:aspect-[28/36]">
           <Image
+            fill
+            style={{ objectFit: "cover" }}
             src="/cta_three.jpg"
             alt=""
-            layout="fill"
-            objectFit="cover"
             className="absolute inset-0"
           />
         </div>

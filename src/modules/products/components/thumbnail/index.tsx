@@ -38,10 +38,9 @@ const ImageOrPlaceholder = ({
   return image ? (
     <Image
       src={image}
+      fill
+      style={{ objectFit: "cover" }}
       alt="Thumbnail"
-      layout="fill"
-      objectFit="cover"
-      objectPosition="center"
       className="absolute inset-0"
       draggable={false}
     />

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import NextHead from "next/head"
 import React from "react"
 
@@ -8,9 +9,10 @@ type HeadProps = {
 }
 
 const Head: React.FC<HeadProps> = ({ title, description, image }) => {
+  const { t } = useTranslation()
   return (
     <NextHead>
-      <title>{title} | ACME</title>
+      <title>{title} | { t('AppName') }</title>
       <meta itemProp="name" content={title} />
       {description && <meta itemProp="description" content={description} />}
       {image && <meta itemProp="image" content={image} />}

@@ -1,61 +1,31 @@
 import { Listbox, Transition } from "@headlessui/react"
-import { useStore } from "@lib/context/store-context"
 import useToggleState from "@lib/hooks/use-toggle-state"
 import { useTranslation } from "react-i18next"
-import { useRegions } from "medusa-react"
-import { Fragment, useEffect, useMemo, useState } from "react"
+import { Fragment } from "react"
 import ReactCountryFlag from "react-country-flag"
-
-type CountryOption = {
-  country: string
-  region: string
-  label: string
-}
-
-const CountrySelect = () => {
-  const { countryCode, setRegion } = useStore()
-  const { regions } = useRegions()
-  const [current, setCurrent] = useState<CountryOption | undefined>(undefined)
+import { localeDefault, localeSupports, localeMaps } from '@lib/config'
+const LanguageSwitcher = () => {
   const { state, open, close } = useToggleState()
-  const { t } = useTranslation()
-  const options: CountryOption[] | undefined = useMemo(() => {
-    return regions
-      ?.map((r) => {
-        return r.countries.map((c) => ({
-          country: c.iso_2,
-          region: r.id,
-          label: c.display_name,
-        }))
-      })
-      .flat()
-  }, [regions])
+  const {
+    t,
+    i18n,
+  } = useTranslation()
 
-  useEffect(() => {
-    if (countryCode) {
-      const option = options?.find((o) => o.country === countryCode)
-      setCurrent(option)
-    }
-  }, [countryCode, options])
-
-  const handleChange = (option: CountryOption) => {
-    setRegion(option.region, option.country)
+  const handleChange = (lang: string) => {
+    i18n.changeLanguage(lang)
     close()
   }
 
+  const mapFlag = (countryCode: string) =>
+    localeMaps[countryCode]?.flag || localeMaps[localeDefault]?.flag
+
   return (
     <div onMouseEnter={open} onMouseLeave={close}>
-      <Listbox
-        onChange={handleChange}
-        value={
-          countryCode
-            ? options?.find((o) => o.country === countryCode)
-            : undefined
-        }
-      >
+      <Listbox onChange={handleChange} value={i18n.language}>
         <Listbox.Button className="py-1 w-full">
           <div className="text-small-regular flex items-center gap-x-2 xsmall:justify-end">
-            <span>{ t('ShippingTo') }:</span>
-            {current && (
+            <span>{t("Language")}:</span>
+            {i18n.language && (
               <span className="text-small-semi flex items-center gap-x-2">
                 <ReactCountryFlag
                   svg
@@ -63,9 +33,8 @@ const CountrySelect = () => {
                     width: "16px",
                     height: "16px",
                   }}
-                  countryCode={current.country}
+                  countryCode={mapFlag(i18n.language)}
                 />
-                {current.label}
               </span>
             )}
           </div>
@@ -82,10 +51,10 @@ const CountrySelect = () => {
               className="absolute -bottom-[calc(100%-36px)] left-0 xsmall:left-auto xsmall:right-0 max-h-[442px] overflow-y-scroll z-[900] bg-white drop-shadow-md text-small-regular uppercase text-black no-scrollbar"
               static
             >
-              {options?.map((o) => {
+              {localeSupports?.map((o: string) => {
                 return (
                   <Listbox.Option
-                    key={o.country}
+                    key={o}
                     value={o}
                     className="py-2 hover:bg-gray-200 px-3 cursor-pointer flex items-center gap-x-2"
                   >
@@ -95,9 +64,8 @@ const CountrySelect = () => {
                         width: "16px",
                         height: "16px",
                       }}
-                      countryCode={o.country}
-                    />{" "}
-                    {o.label}
+                      countryCode={mapFlag(o)}
+                    />
                   </Listbox.Option>
                 )
               })}
@@ -109,4 +77,4 @@ const CountrySelect = () => {
   )
 }
 
-export default CountrySelect
+export default LanguageSwitcher

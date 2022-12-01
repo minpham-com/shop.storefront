@@ -1,5 +1,5 @@
 import { CheckoutFormValues } from "@lib/context/checkout-context"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import ConnectForm from "@modules/common/components/connect-form"
 import Input from "@modules/common/components/input"
 import CountrySelect from "../country-select"

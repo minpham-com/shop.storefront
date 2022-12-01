@@ -1,5 +1,5 @@
 import { medusaClient } from "@lib/config"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import { Customer } from "@medusajs/medusa"
 import Input from "@modules/common/components/input"
 import { useUpdateMe } from "medusa-react"

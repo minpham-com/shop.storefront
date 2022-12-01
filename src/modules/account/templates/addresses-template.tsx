@@ -1,5 +1,5 @@
 import { useAccount } from "@lib/context/account-context"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import AddressBook from "../components/address-book"
 
 const AddressesTemplate = () => {

@@ -1,4 +1,4 @@
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import CartTemplate from "@modules/cart/templates"
 import Head from "@modules/common/components/head"
 import Layout from "@modules/layout/templates"
@@ -7,10 +7,10 @@ import { NextPageWithLayout } from "types/global"
 
 const Cart: NextPageWithLayout = () => {
   const { t } = useTranslation()
-  
+
   return (
     <>
-      <Head title={ t("ShoppingBag") } description={ t("CartPageDescription") } />
+      <Head title={t("ShoppingBag")} description={t("CartPageDescription")} />
       <CartTemplate />
     </>
   )

@@ -1,6 +1,6 @@
 import { Disclosure } from "@headlessui/react"
 import useToggleState from "@lib/hooks/use-toggle-state"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import Button from "@modules/common/components/button"
 import clsx from "clsx"
 import { useEffect } from "react"

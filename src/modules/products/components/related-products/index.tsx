@@ -1,6 +1,6 @@
 import { fetchProductsList } from "@lib/data"
 import usePreviews from "@lib/hooks/use-previews"
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons"
 import repeat from "@lib/util/repeat"
 import { Product, StoreGetProductsParams } from "@medusajs/medusa"

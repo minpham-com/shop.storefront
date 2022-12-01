@@ -1,4 +1,4 @@
-import useTranslation from "@lib/hooks/use-translation"
+import { useTranslation } from "react-i18next"
 import UnderlineLink from "@modules/common/components/underline-link"
 import Image from "next/image"
 
@@ -18,11 +18,11 @@ const Hero = () => {
       </div>
       <Image
         src="/hero.jpg"
-        layout="fill"
+        fill
+        style={{ objectFit: "cover" }}
         loading="eager"
         priority={true}
         quality={90}
-        objectFit="cover"
         alt="Photo by @thevoncomplex https://unsplash.com/@thevoncomplex"
         className="absolute inset-0"
         draggable="false"
