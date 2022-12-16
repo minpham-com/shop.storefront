@@ -14,7 +14,7 @@ function App({
   pageProps,
 }: AppPropsWithLayout<{ dehydratedState?: unknown }>) {
   const getLayout = Component.getLayout ?? ((page) => page)
-  
+
   return (
     <MedusaProvider
       baseUrl={MEDUSA_BACKEND_URL}
@@ -28,9 +28,7 @@ function App({
             <CartProvider>
               <StoreProvider>
                 <AccountProvider>
-                  <I18nProvider>
-                    {getLayout(<Component {...pageProps}/>)}
-                  </I18nProvider>
+                  {getLayout(<Component {...pageProps} />)}
                 </AccountProvider>
               </StoreProvider>
             </CartProvider>

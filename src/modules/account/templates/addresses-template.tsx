@@ -8,7 +8,7 @@ const AddressesTemplate = () => {
   if (retrievingCustomer || !customer) {
     return null
   }
-  
+
   return (
     <div className="w-full">
       <div className="mb-8 flex flex-col gap-y-4">

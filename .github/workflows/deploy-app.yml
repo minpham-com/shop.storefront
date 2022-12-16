@@ -3,13 +3,13 @@
 
 name: Deploy to Firebase Hosting
 on:
-  push:
-    branches: [develop]
+  release:
+    types: [published]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: develop
+    environment: production
     env:
       PREFIX: ${{ secrets.PREFIX }}
       PROJECT_ID: ${{ secrets.PROJECT_ID }}
