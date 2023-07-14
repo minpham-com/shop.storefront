@@ -9,12 +9,11 @@
 </p>
 
 <h1 align="center">
-  Medusa Next.js Starter
+  Medusa Next.js Starter Template
 </h1>
 
 <p align="center">
-Medusa is an open-source headless commerce engine that enables developers to create amazing digital commerce experiences.
-</p>
+Combine Medusa's modules for your commerce backend with the newest Next.js 13 features for a performant storefront.</p>
 
 <p align="center">
   <a href="https://github.com/medusajs/medusa/blob/master/CONTRIBUTING.md">
@@ -28,7 +27,13 @@ Medusa is an open-source headless commerce engine that enables developers to cre
   </a>
 </p>
 
-> **Prerequisites**: To use the starter you should have a Medusa server running locally on port 9000. Check out [medusa-starter-default](https://github.com/medusajs/medusa-starter-default) for a quick setup.
+### Prerequisites
+To use the starter you should have a Medusa server running locally on port 9000.
+For a quick setup, run: 
+```shell
+npx create-medusa-app@latest
+```
+Check out [create-medusa-app docs](https://docs.medusajs.com/create-medusa-app) for more details and troubleshooting.
 
 # Overview
 
@@ -39,12 +44,17 @@ The Medusa Next.js Starter is built with:
 - [Medusa](https://medusajs.com/)
 
 Features include:
-- Full e-commerce support
+- Full e-commerce support:
+  - Product Detail Page
+  - Product Overview Page
+  - Search with Algolia
+  - Product Collections
+  - Cart
+  - Checkout with PayPal and Stripe
+  - User Accounts
+  - Order Details
 - Next.js 13
-- App Router
-- Customer Accounts
-- Search with Algolia
-- Checkout with PayPal and Stripe
+- Full App Router support with [Dynamic Routes](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes) and [Route Groups](https://nextjs.org/docs/app/building-your-application/routing/route-groups)
 - [Product Module](https://docs.medusajs.com/modules/products/serverless-module) support (coming soon)
 
 # Quickstart
