@@ -44,7 +44,7 @@ The Medusa Next.js Starter is built with:
 - [Medusa](https://medusajs.com/)
 
 Features include:
-- Full e-commerce support:
+- Full ecommerce support:
   - Product Detail Page
   - Product Overview Page
   - Search with Algolia
@@ -55,7 +55,7 @@ Features include:
   - Order Details
 - Next.js 13
 - Full App Router support with [Dynamic Routes](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes) and [Route Groups](https://nextjs.org/docs/app/building-your-application/routing/route-groups)
-- [Product Module](https://docs.medusajs.com/modules/products/serverless-module) support (coming soon)
+- [Product Module](https://docs.medusajs.com/modules/products/serverless-module) support (beta)
 
 # Quickstart
 
@@ -98,6 +98,33 @@ Your site is now running at http://localhost:8000!
 
 Edit `/pages/index.tsx` to see your site update in real-time!
 
+# Product Module
+> The Product Module is currently in beta. You can learn more about it [here](https://docs.medusajs.com/modules/products/serverless-module). In addition, the product module in the Next.js storefront can't be used without the Medusa backend running at the moment.
+
+This starter has full support for our new serverless [Product Module](https://docs.medusajs.com/modules/products/serverless-module) for retrieving and manipulating product data directly from a serverless function. This keeps your product logic close to the frontend, making it easy to customize or extend Medusa's core functionality from within your Next.js project.
+
+By default, this starter uses the standard Medusa API for product and collection retrieval. To enable the Product Module, first, make sure to set the following environment variables:
+
+- `PRODUCT_POSTGRES_URL`: the URL of your PostgreSQL databsae.
+- `NEXT_PUBLIC_BASE_URL`: the URL of your storefront's base URL. If you're running it locally, it should be http://localhost:8000.
+
+Then, enable the productModule feature flag in `./store.config.json`:
+
+```javascript
+{
+  "features": {
+    // other features...
+    "productModule": true
+  }
+}
+```
+
+Make sure the Medusa backend is running, then start (or restart) your Next.js storefront.
+
+Done! All product and collection data should now be coming from the module. The Product Module routes are all in `src/app/api` for you to edit and play around with.
+
+To opt out of using the product module, simply set the `productModule` feature flag to `false` and restart the server.
+
 # Payment integrations
 
 By default this starter supports the following payment integrations
@@ -118,9 +145,10 @@ You will also need to setup the integrations in your Medusa server. See the [Med
 
 This starter is configured to support using the `medusa-search-meilisearch` plugin out of the box. To enable search you will need to enable the feature flag in `./store-config.json`, which you do by changing the config to this:
 
-```json
+```javascript
 {
   "features": {
+    // other features...
     "search": true
   }
 }
