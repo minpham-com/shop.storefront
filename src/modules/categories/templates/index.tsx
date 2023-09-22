@@ -1,7 +1,10 @@
 "use client"
 
 import usePreviews from "@lib/hooks/use-previews"
-import { getProductsByCollectionHandle } from "@lib/data"
+import {
+  ProductCategoryWithChildren,
+  getProductsByCategoryHandle,
+} from "@lib/data"
 import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons"
 import repeat from "@lib/util/repeat"
 import ProductPreview from "@modules/products/components/product-preview"
@@ -10,13 +13,22 @@ import { useInfiniteQuery } from "@tanstack/react-query"
 import { useCart } from "medusa-react"
 import React, { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
-import { ProductCollection } from "@medusajs/medusa"
+import Link from "next/link"
+import UnderlineLink from "@modules/common/components/underline-link"
+import { notFound } from "next/navigation"
 
-const CollectionTemplate: React.FC<{ collection: ProductCollection }> = ({
-  collection,
-}) => {
+type CategoryTemplateProps = {
+  categories: ProductCategoryWithChildren[]
+}
+
+const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
   const { cart } = useCart()
   const { ref, inView } = useInView()
+
+  const category = categories[categories.length - 1]
+  const parents = categories.slice(0, categories.length - 1)
+
+  if (!category) notFound()
 
   const {
     data: infiniteData,
@@ -25,13 +37,13 @@ const CollectionTemplate: React.FC<{ collection: ProductCollection }> = ({
     isFetchingNextPage,
     refetch,
   } = useInfiniteQuery(
-    [`get_collection_products`, collection.handle, cart?.id],
+    [`get_category_products`, category.handle, cart?.id],
     ({ pageParam }) =>
-      getProductsByCollectionHandle({
+      getProductsByCategoryHandle({
         pageParam,
-        handle: collection.handle!,
+        handle: category.handle!,
         cartId: cart?.id,
-        currencyCode: cart?.region.currency_code,
+        currencyCode: cart?.region?.currency_code,
       }),
     {
       getNextPageParam: (lastPage) => lastPage.nextPage,
@@ -58,9 +70,37 @@ const CollectionTemplate: React.FC<{ collection: ProductCollection }> = ({
 
   return (
     <div className="content-container py-6">
-      <div className="mb-8 text-2xl-semi">
-        <h1>{collection.title}</h1>
+      <div className="flex flex-row mb-8 text-2xl-semi gap-4">
+        {parents &&
+          parents.map((parent) => (
+            <span key={parent.id} className="text-gray-500">
+              <Link
+                className="mr-4 hover:text-black"
+                href={`/${parent.handle}`}
+              >
+                {parent.name}
+              </Link>
+              /
+            </span>
+          ))}
+        <h1>{category.name}</h1>
       </div>
+      {category.description && (
+        <div className="mb-8 text-base-regular">
+          <p>{category.description}</p>
+        </div>
+      )}
+      {category.category_children && (
+        <div className="mb-8 text-base-large">
+          <ul className="grid grid-cols-1 gap-2">
+            {category.category_children?.map((c) => (
+              <li key={c.id}>
+                <UnderlineLink href={`/${c.handle}`}>{c.name}</UnderlineLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-4 gap-y-8">
         {previews.map((p) => (
           <li key={p.id}>
@@ -84,4 +124,4 @@ const CollectionTemplate: React.FC<{ collection: ProductCollection }> = ({
   )
 }
 
-export default CollectionTemplate
+export default CategoryTemplate

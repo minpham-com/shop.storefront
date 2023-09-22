@@ -28,7 +28,7 @@ Combine Medusa's modules for your commerce backend with the newest Next.js 13 fe
 </p>
 
 ### Prerequisites
-To use the starter you should have a Medusa server running locally on port 9000.
+To use the [Next.js Starter Template](https://medusajs.com/nextjs-commerce/), you should have a Medusa server running locally on port 9000.
 For a quick setup, run: 
 ```shell
 npx create-medusa-app@latest
@@ -143,7 +143,7 @@ You will also need to setup the integrations in your Medusa server. See the [Med
 
 # Search integration
 
-This starter is configured to support using the `medusa-search-meilisearch` plugin out of the box. To enable search you will need to enable the feature flag in `./store-config.json`, which you do by changing the config to this:
+This starter is configured to support using the `medusa-search-meilisearch` plugin out of the box. To enable search you will need to enable the feature flag in `./store.config.json`, which you do by changing the config to this:
 
 ```javascript
 {
