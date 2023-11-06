@@ -13,7 +13,7 @@
 </h1>
 
 <p align="center">
-Combine Medusa's modules for your commerce backend with the newest Next.js 13 features for a performant storefront.</p>
+Combine Medusa's modules for your commerce backend with the newest Next.js 14 features for a performant storefront.</p>
 
 <p align="center">
   <a href="https://github.com/medusajs/medusa/blob/master/CONTRIBUTING.md">
@@ -53,7 +53,7 @@ Features include:
   - Checkout with PayPal and Stripe
   - User Accounts
   - Order Details
-- Next.js 13
+- Next.js 14
 - Full App Router support with [Dynamic Routes](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes) and [Route Groups](https://nextjs.org/docs/app/building-your-application/routing/route-groups)
 - [Product Module](https://docs.medusajs.com/modules/products/serverless-module) support (beta)
 
@@ -124,6 +124,8 @@ Make sure the Medusa backend is running, then start (or restart) your Next.js st
 Done! All product and collection data should now be coming from the module. The Product Module routes are all in `src/app/api` for you to edit and play around with.
 
 To opt out of using the product module, simply set the `productModule` feature flag to `false` and restart the server.
+
+Deploying to Vercel? If you're not planning on using the serverless modules, you might encounter errors when deploying to Vercel. You can safely delete or exclude the `src/app/api` folder before deploying. The API routes are only used by the serverless modules.
 
 # Payment integrations
 
