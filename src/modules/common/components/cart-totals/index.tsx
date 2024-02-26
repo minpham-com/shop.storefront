@@ -1,7 +1,9 @@
+"use client"
+
+import { formatAmount } from "@lib/util/prices"
+import { InformationCircleSolid } from "@medusajs/icons"
 import { Cart, Order } from "@medusajs/medusa"
 import { Tooltip } from "@medusajs/ui"
-import { InformationCircleSolid } from "@medusajs/icons"
-import { formatAmount } from "medusa-react"
 import React from "react"
 
 type CartTotalsProps = {

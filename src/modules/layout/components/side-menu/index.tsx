@@ -1,24 +1,23 @@
-import Link from "next/link"
-import { Fragment } from "react"
+"use client"
+
 import { Popover, Transition } from "@headlessui/react"
-import { XMark, ArrowRightMini } from "@medusajs/icons"
+import { ArrowRightMini, XMark } from "@medusajs/icons"
+import { Region } from "@medusajs/medusa"
 import { Text, clx, useToggleState } from "@medusajs/ui"
+import { Fragment } from "react"
+
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CountrySelect from "../country-select"
 
 const SideMenuItems = {
   Home: "/",
   Store: "/store",
-  Search: "",
+  Search: "/search",
   Account: "/account",
   Cart: "/cart",
 }
 
-const SideMenu = ({ searchModalOpen }: { searchModalOpen: () => void }) => {
-  const handleSearchClick = (close: () => void) => {
-    searchModalOpen()
-    close()
-  }
-
+const SideMenu = ({ regions }: { regions: Region[] | null }) => {
   const toggleState = useToggleState()
 
   return (
@@ -43,7 +42,7 @@ const SideMenu = ({ searchModalOpen }: { searchModalOpen: () => void }) => {
                 leaveFrom="opacity-100 backdrop-blur-2xl"
                 leaveTo="opacity-0"
               >
-                <Popover.Panel className="flex flex-col absolute w-1/3 2xl:w-1/4 h-[calc(100vh-1rem)] z-30 inset-x-0 text-sm text-ui-fg-on-color m-2 backdrop-blur-2xl">
+                <Popover.Panel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-30 inset-x-0 text-sm text-ui-fg-on-color m-2 backdrop-blur-2xl">
                   <div className="flex flex-col h-full bg-[rgba(3,7,18,0.5)] rounded-rounded justify-between p-6">
                     <div className="flex justify-end" id="xmark">
                       <button onClick={close}>
@@ -52,30 +51,15 @@ const SideMenu = ({ searchModalOpen }: { searchModalOpen: () => void }) => {
                     </div>
                     <ul className="flex flex-col gap-6 items-start justify-start">
                       {Object.entries(SideMenuItems).map(([name, href]) => {
-                        if (
-                          name === "Search" &&
-                          process.env.FEATURE_SEARCH_ENABLED
-                        ) {
-                          return (
-                            <li key={name}>
-                              <button
-                                className="text-3xl leading-10 hover:text-ui-fg-disabled"
-                                onClick={() => handleSearchClick(close)}
-                              >
-                                {name}
-                              </button>
-                            </li>
-                          )
-                        }
                         return (
                           <li key={name}>
-                            <Link
+                            <LocalizedClientLink
                               href={href}
                               className="text-3xl leading-10 hover:text-ui-fg-disabled"
                               onClick={close}
                             >
                               {name}
-                            </Link>
+                            </LocalizedClientLink>
                           </li>
                         )
                       })}
@@ -86,7 +70,12 @@ const SideMenu = ({ searchModalOpen }: { searchModalOpen: () => void }) => {
                         onMouseEnter={toggleState.open}
                         onMouseLeave={toggleState.close}
                       >
-                        <CountrySelect toggleState={toggleState} />
+                        {regions && (
+                          <CountrySelect
+                            toggleState={toggleState}
+                            regions={regions}
+                          />
+                        )}
                         <ArrowRightMini
                           className={clx(
                             "transition-transform duration-150",

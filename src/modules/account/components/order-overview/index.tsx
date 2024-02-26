@@ -1,22 +1,12 @@
 "use client"
 
+import { Order } from "@medusajs/medusa"
 import { Button } from "@medusajs/ui"
-import Spinner from "@modules/common/icons/spinner"
-import { useCustomerOrders } from "medusa-react"
-import Link from "next/link"
+
 import OrderCard from "../order-card"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
-const OrderOverview = () => {
-  const { orders, isLoading } = useCustomerOrders()
-
-  if (isLoading) {
-    return (
-      <div className="text-gray-900 w-full flex justify-center pt-12">
-        <Spinner size={36} />
-      </div>
-    )
-  }
-
+const OrderOverview = ({ orders }: { orders: Order[] }) => {
   if (orders?.length) {
     return (
       <div className="flex flex-col gap-y-8 w-full">
@@ -39,9 +29,9 @@ const OrderOverview = () => {
         You don&apos;t have any orders yet, let us change that {":)"}
       </p>
       <div className="mt-4">
-        <Link href="/" passHref>
+        <LocalizedClientLink href="/" passHref>
           <Button>Continue shopping</Button>
-        </Link>
+        </LocalizedClientLink>
       </div>
     </div>
   )
