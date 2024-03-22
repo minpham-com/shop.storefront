@@ -1,5 +1,3 @@
-"use server"
-
 import {
   ProductCategory,
   ProductCollection,
@@ -246,7 +244,13 @@ export async function getToken(credentials: StorePostAuthReq) {
       },
     })
     .then(({ access_token }) => {
-      access_token && cookies().set("_medusa_jwt", access_token)
+      access_token &&
+        cookies().set("_medusa_jwt", access_token, {
+          maxAge: 60 * 60 * 24 * 7,
+          httpOnly: true,
+          sameSite: "strict",
+          secure: process.env.NODE_ENV === "production",
+        })
       return access_token
     })
     .catch((err) => {
